@@ -31,6 +31,10 @@
 		37A457BD1A8714E0004C4634 /* Module3Q1C.png in Resources */ = {isa = PBXBuildFile; fileRef = 37A457B41A8714E0004C4634 /* Module3Q1C.png */; };
 		37A457C01A871501004C4634 /* Module3Q2C.png in Resources */ = {isa = PBXBuildFile; fileRef = 37A457BF1A871501004C4634 /* Module3Q2C.png */; };
 		37A457C21A8715D0004C4634 /* Module3Q1.png in Resources */ = {isa = PBXBuildFile; fileRef = 37A457C11A8715D0004C4634 /* Module3Q1.png */; };
+		37A457C41A87191B004C4634 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A457C31A87191B004C4634 /* MediaPlayer.framework */; };
+		37A457C71A871934004C4634 /* Module4.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A457C61A871934004C4634 /* Module4.m */; };
+		37A457CB1A871A79004C4634 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A457CA1A871A79004C4634 /* AVFoundation.framework */; };
+		37A457F31A872A83004C4634 /* IARC.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 37A457F21A872A83004C4634 /* IARC.mp4 */; };
 		37F0A09E1A85CBC000833582 /* Module1-6 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F0A0931A85CBC000833582 /* Module1-6 copy.png */; };
 		37F0A09F1A85CBC000833582 /* Module1-7 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F0A0941A85CBC000833582 /* Module1-7 copy.png */; };
 		37F0A0A01A85CBC000833582 /* Module1-8 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F0A0951A85CBC000833582 /* Module1-8 copy.png */; };
@@ -126,6 +130,11 @@
 		37A457B41A8714E0004C4634 /* Module3Q1C.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Module3Q1C.png; sourceTree = "<group>"; };
 		37A457BF1A871501004C4634 /* Module3Q2C.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Module3Q2C.png; sourceTree = "<group>"; };
 		37A457C11A8715D0004C4634 /* Module3Q1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Module3Q1.png; sourceTree = "<group>"; };
+		37A457C31A87191B004C4634 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		37A457C51A871934004C4634 /* Module4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Module4.h; path = ../Module4.h; sourceTree = "<group>"; };
+		37A457C61A871934004C4634 /* Module4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Module4.m; path = ../Module4.m; sourceTree = "<group>"; };
+		37A457CA1A871A79004C4634 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		37A457F21A872A83004C4634 /* IARC.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = IARC.mp4; sourceTree = "<group>"; };
 		37F0A0931A85CBC000833582 /* Module1-6 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Module1-6 copy.png"; sourceTree = "<group>"; };
 		37F0A0941A85CBC000833582 /* Module1-7 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Module1-7 copy.png"; sourceTree = "<group>"; };
 		37F0A0951A85CBC000833582 /* Module1-8 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Module1-8 copy.png"; sourceTree = "<group>"; };
@@ -198,6 +207,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37A457CB1A871A79004C4634 /* AVFoundation.framework in Frameworks */,
+				37A457C41A87191B004C4634 /* MediaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +249,13 @@
 				37A457C11A8715D0004C4634 /* Module3Q1.png */,
 			);
 			name = Module3;
+			sourceTree = "<group>";
+		};
+		37A457C81A871969004C4634 /* IARC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = IARC;
 			sourceTree = "<group>";
 		};
 		37F0A0921A85CBA900833582 /* Module1 */ = {
@@ -301,6 +319,8 @@
 		3896FF251A85A14400144A32 = {
 			isa = PBXGroup;
 			children = (
+				37A457CA1A871A79004C4634 /* AVFoundation.framework */,
+				37A457C31A87191B004C4634 /* MediaPlayer.framework */,
 				3896FF301A85A14400144A32 /* LearningModule */,
 				3896FF4A1A85A14400144A32 /* LearningModuleTests */,
 				3896FF2F1A85A14400144A32 /* Products */,
@@ -319,11 +339,13 @@
 		3896FF301A85A14400144A32 /* LearningModule */ = {
 			isa = PBXGroup;
 			children = (
+				37A457F21A872A83004C4634 /* IARC.mp4 */,
 				37F0A0D81A86C0A200833582 /* continueToQuiz.png */,
 				37F0A0BD1A867E9600833582 /* background.png */,
+				37A457C81A871969004C4634 /* IARC */,
+				37F0A0921A85CBA900833582 /* Module1 */,
 				37F0A0A91A85D19200833582 /* Module2 */,
 				37A457881A87117A004C4634 /* Module3 */,
-				37F0A0921A85CBA900833582 /* Module1 */,
 				3896FF351A85A14400144A32 /* AppDelegate.h */,
 				3896FF361A85A14400144A32 /* AppDelegate.m */,
 				3896FF3B1A85A14400144A32 /* Main.storyboard */,
@@ -339,6 +361,8 @@
 				37A4578A1A8711C5004C4634 /* Module3.m */,
 				37A457AA1A87149D004C4634 /* Module3Quiz.h */,
 				37A457AB1A87149D004C4634 /* Module3Quiz.m */,
+				37A457C51A871934004C4634 /* Module4.h */,
+				37A457C61A871934004C4634 /* Module4.m */,
 				3896FF3E1A85A14400144A32 /* Images.xcassets */,
 				3896FF401A85A14400144A32 /* LaunchScreen.xib */,
 				3896FF311A85A14400144A32 /* Supporting Files */,
@@ -466,6 +490,7 @@
 				37F178041A86E93F005013A1 /* Module2.png in Resources */,
 				37F0A0DB1A86C19C00833582 /* PTSans.ttc in Resources */,
 				37A4579F1A871206004C4634 /* Module3-5.png in Resources */,
+				37A457F31A872A83004C4634 /* IARC.mp4 in Resources */,
 				37A4579C1A871206004C4634 /* Module3-8.png in Resources */,
 				3896FF3D1A85A14400144A32 /* Main.storyboard in Resources */,
 				37F178221A86F97B005013A1 /* Module2Q3C.png in Resources */,
@@ -540,6 +565,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37A457C71A871934004C4634 /* Module4.m in Sources */,
 				37F0A0C31A868A4800833582 /* Module1Quiz.m in Sources */,
 				37A4578B1A8711C5004C4634 /* Module3.m in Sources */,
 				37A457AC1A87149D004C4634 /* Module3Quiz.m in Sources */,
