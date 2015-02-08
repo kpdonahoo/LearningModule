@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3746AC271A87C4CA00CA8838 /* demoSurvey.png in Resources */ = {isa = PBXBuildFile; fileRef = 3746AC261A87C4CA00CA8838 /* demoSurvey.png */; };
 		37A4578B1A8711C5004C4634 /* Module3.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A4578A1A8711C5004C4634 /* Module3.m */; };
 		37A4579A1A871206004C4634 /* Module3-10.png in Resources */ = {isa = PBXBuildFile; fileRef = 37A4578F1A871206004C4634 /* Module3-10.png */; };
 		37A4579B1A871206004C4634 /* Module3-9.png in Resources */ = {isa = PBXBuildFile; fileRef = 37A457901A871206004C4634 /* Module3-9.png */; };
@@ -105,6 +106,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3746AC261A87C4CA00CA8838 /* demoSurvey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = demoSurvey.png; sourceTree = "<group>"; };
 		37A457891A8711C5004C4634 /* Module3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Module3.h; sourceTree = "<group>"; };
 		37A4578A1A8711C5004C4634 /* Module3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Module3.m; sourceTree = "<group>"; };
 		37A4578F1A871206004C4634 /* Module3-10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Module3-10.png"; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 			children = (
 				37A457F21A872A83004C4634 /* IARC.mp4 */,
 				37F0A0D81A86C0A200833582 /* continueToQuiz.png */,
+				3746AC261A87C4CA00CA8838 /* demoSurvey.png */,
 				37F0A0BD1A867E9600833582 /* background.png */,
 				37A457C81A871969004C4634 /* IARC */,
 				37F0A0921A85CBA900833582 /* Module1 */,
@@ -506,6 +509,7 @@
 				37A457B91A8714E0004C4634 /* Module3Q3.png in Resources */,
 				37F177FD1A86DF70005013A1 /* Module1Completed.png in Resources */,
 				37F0A09E1A85CBC000833582 /* Module1-6 copy.png in Resources */,
+				3746AC271A87C4CA00CA8838 /* demoSurvey.png in Resources */,
 				37F0A0A21A85CBC000833582 /* Module1-1 copy.png in Resources */,
 				37A4579E1A871206004C4634 /* Module3-6.png in Resources */,
 				37F0A0A51A85CBC000833582 /* Module1-4 copy.png in Resources */,
