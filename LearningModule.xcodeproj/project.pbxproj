@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3746AC271A87C4CA00CA8838 /* demoSurvey.png in Resources */ = {isa = PBXBuildFile; fileRef = 3746AC261A87C4CA00CA8838 /* demoSurvey.png */; };
+		3746AC281A87C94F00CA8838 /* IARC.mp4 in Sources */ = {isa = PBXBuildFile; fileRef = 37A457F21A872A83004C4634 /* IARC.mp4 */; };
 		37A4578B1A8711C5004C4634 /* Module3.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A4578A1A8711C5004C4634 /* Module3.m */; };
 		37A4579A1A871206004C4634 /* Module3-10.png in Resources */ = {isa = PBXBuildFile; fileRef = 37A4578F1A871206004C4634 /* Module3-10.png */; };
 		37A4579B1A871206004C4634 /* Module3-9.png in Resources */ = {isa = PBXBuildFile; fileRef = 37A457901A871206004C4634 /* Module3-9.png */; };
@@ -575,6 +576,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37A457F81A872E8E004C4634 /* DemoSurvey.m in Sources */,
+				3746AC281A87C94F00CA8838 /* IARC.mp4 in Sources */,
 				37A457C71A871934004C4634 /* Module4.m in Sources */,
 				37F0A0C31A868A4800833582 /* Module1Quiz.m in Sources */,
 				37A4578B1A8711C5004C4634 /* Module3.m in Sources */,
