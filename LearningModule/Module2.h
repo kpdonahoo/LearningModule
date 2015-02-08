@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  Module2.h
 //  LearningModule
 //
-//  Created by Kevin Donahoo on 2/6/15.
+//  Created by Amanda Doyle on 2/7/15.
 //  Copyright (c) 2015 Sharkbait. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface Module2 : UIViewController
 
 @end
-
