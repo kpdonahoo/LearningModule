@@ -63,6 +63,7 @@
     
 }
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
+    [self performSegueWithIdentifier:@"toVideoQuiz" sender:self];
 
 }
 
