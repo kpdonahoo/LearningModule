@@ -8,7 +8,8 @@
 
 #import "Module2Quiz.h"
 
-@interface Module2Quiz ()
+@interface Module2Quiz () <UIAlertViewDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UIButton *aButton;
 @property (weak, nonatomic) IBOutlet UIButton *bButton;
@@ -23,7 +24,7 @@
 
 NSArray *answers;
 NSArray *questions;
-NSArray *correct;
+NSArray *correctAnswers;
 NSArray *incorrect;
 int questions_index;
 @synthesize image;
@@ -34,6 +35,8 @@ int questions_index;
 @synthesize continueButton;
 @synthesize continueButton2;
 @synthesize toModule2;
+@synthesize backButton;
+UIAlertView *alert;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,7 +54,7 @@ int questions_index;
     answers = @[@"d",@"a",@"b"];
     questions = @[@"Module2Q1.png",@"Module2Q2.png",@"Module2Q3.png"];
     incorrect = @[@"Module2Q1I.png",@"Module2Q2I.png",@"Module2Q3I.png"];
-    correct = @[@"Module2Q1C.png",@"Module2Q2C.png",@"Module2Q3C.png"];
+    correctAnswers = @[@"Module2Q1C.png",@"Module2Q2C.png",@"Module2Q3C.png"];
     
     image.image = [UIImage imageNamed:[questions objectAtIndex:0]];
     [self performSelector:@selector(hideAD) withObject:nil afterDelay:.5];
@@ -94,7 +97,7 @@ int questions_index;
         [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
         [[self.image layer] addAnimation:animation forKey:nil];
         
-        image.image = [UIImage imageNamed:[correct objectAtIndex:questions_index]];
+        image.image = [UIImage imageNamed:[correctAnswers objectAtIndex:questions_index]];
         
     } else {
         [self performSelector:@selector(hideButtonOne) withObject:nil afterDelay:.5];
@@ -164,6 +167,12 @@ int questions_index;
 }
 
 - (IBAction)toModule2:(id)sender {
+    alert = [[UIAlertView alloc] initWithTitle:@"Warning!" message:@"\nModule 3 contains graphic content."  delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:nil];
+    alert.tag = 1;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     [self performSegueWithIdentifier:@"toModule3" sender:self];
 }
 
@@ -205,6 +214,8 @@ int questions_index;
     animation.duration = 0.3;
     [toModule2.layer addAnimation:animation forKey:nil];
     toModule2.hidden = NO;
+    [backButton.layer addAnimation:animation forKey:nil];
+    backButton.hidden = NO;
 }
 -(void) hideAD {
     CATransition *animation = [CATransition animation];
@@ -217,16 +228,9 @@ int questions_index;
     dButton.hidden = NO;
 }
 
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (IBAction)backButton:(id)sender {
+    [self performSegueWithIdentifier:@"backToModule2" sender:self];
+}
 
 @end
 

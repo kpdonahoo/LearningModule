@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Intro1.png" translatesAutoresizingMaskIntoConstraints="NO" id="Agt-dV-gpc">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="Agt-dV-gpc">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                 </imageView>
             </subviews>
@@ -21,6 +21,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Intro1.png" width="1063" height="800"/>
+        <image name="Splash.png" width="581" height="432"/>
     </resources>
 </document>

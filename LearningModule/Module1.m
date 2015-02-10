@@ -107,8 +107,6 @@ int image_index;
     [self performSegueWithIdentifier: @"toQuiz" sender: self];
 }
 
-
-
 /*
 #pragma mark - Navigation
 

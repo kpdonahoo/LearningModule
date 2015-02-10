@@ -38,9 +38,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BGH-dG-QU6">
-                                <rect key="frame" x="356" y="409" width="365" height="184"/>
+                                <rect key="frame" x="518" y="440" width="251" height="138"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="beginModule1.png">
+                                <state key="normal" image="button.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -61,7 +61,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bzq-d5-PvG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="86" y="-1009"/>
+            <point key="canvasLocation" x="38" y="-1035"/>
         </scene>
         <!--Module1 Quiz-->
         <scene sceneID="q31-fr-h3d">
@@ -79,16 +79,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8vz-hL-6AA">
-                                <rect key="frame" x="301" y="496" width="286" height="106"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="aClicked:" destination="Xp0-7r-gnI" eventType="touchUpInside" id="Nbx-Me-PpT"/>
-                                </connections>
-                            </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jpJ-tP-srz">
                                 <rect key="frame" x="640" y="496" width="286" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -119,16 +109,6 @@
                                     <action selector="continueButtonClicked:" destination="Xp0-7r-gnI" eventType="touchUpInside" id="wMA-H9-AQW"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yxW-Py-Lbo">
-                                <rect key="frame" x="580" y="595" width="286" height="106"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="toModule2:" destination="Xp0-7r-gnI" eventType="touchUpInside" id="RYD-D2-ARa"/>
-                                </connections>
-                            </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EKN-Zs-VqM">
                                 <rect key="frame" x="660" y="596" width="286" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -140,13 +120,44 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WNE-UL-8nX">
-                                <rect key="frame" x="467" y="599" width="286" height="106"/>
+                                <rect key="frame" x="470" y="596" width="286" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="button.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="continueButtonClicked:" destination="Xp0-7r-gnI" eventType="touchUpInside" id="kzT-iI-aPe"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yxW-Py-Lbo">
+                                <rect key="frame" x="814" y="605" width="286" height="106"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="button.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toModule2:" destination="Xp0-7r-gnI" eventType="touchUpInside" id="RYD-D2-ARa"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uoi-eE-QDI">
+                                <rect key="frame" x="-69" y="605" width="286" height="106"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="backButton.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="continueButtonClicked:" destination="Xp0-7r-gnI" eventType="touchUpInside" id="aYb-2o-hQA"/>
+                                    <action selector="toModule1:" destination="Xp0-7r-gnI" eventType="touchUpInside" id="Dgq-Sz-AM8"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8vz-hL-6AA">
+                                <rect key="frame" x="301" y="496" width="286" height="106"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="button.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="aClicked:" destination="Xp0-7r-gnI" eventType="touchUpInside" id="Nbx-Me-PpT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -157,6 +168,7 @@
                     <connections>
                         <outlet property="aButton" destination="8vz-hL-6AA" id="WBV-Go-8zi"/>
                         <outlet property="bButton" destination="wp1-1j-nOO" id="4Sr-N4-ikj"/>
+                        <outlet property="backButton" destination="uoi-eE-QDI" id="Jnn-FU-MTD"/>
                         <outlet property="cButton" destination="jpJ-tP-srz" id="Vd5-tr-BRI"/>
                         <outlet property="continueButton" destination="v2f-tG-iBo" id="5fc-b2-BTe"/>
                         <outlet property="continueButton2" destination="WNE-UL-8nX" id="XjP-XL-jzi"/>
@@ -164,11 +176,12 @@
                         <outlet property="image" destination="TGg-O3-psQ" id="1Pl-WJ-dgd"/>
                         <outlet property="toModule2" destination="yxW-Py-Lbo" id="WVj-pu-9Hl"/>
                         <segue destination="FmM-Nh-Zmb" kind="modal" identifier="toModule2" id="qcR-ID-Yif"/>
+                        <segue destination="qvl-As-lyL" kind="modal" identifier="toModule1" id="AlL-ML-htN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I7z-ly-I1X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1212" y="-1009"/>
+            <point key="canvasLocation" x="1206" y="-1035"/>
         </scene>
         <!--Module2-->
         <scene sceneID="n7w-mu-gvm">
@@ -204,9 +217,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GEq-hT-bRJ">
-                                <rect key="frame" x="356" y="409" width="365" height="184"/>
+                                <rect key="frame" x="461" y="416" width="365" height="184"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="beginModule1.png">
+                                <state key="normal" image="button.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -227,7 +240,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J6v-Xk-wSw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="142" y="431"/>
+            <point key="canvasLocation" x="130" y="403"/>
         </scene>
         <!--Module2 Quiz-->
         <scene sceneID="GwJ-mE-EMS">
@@ -241,7 +254,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Module2Q1.png" id="DH4-A0-atO">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Module2Completed.png" id="DH4-A0-atO">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -286,7 +299,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vgp-RC-Gs1">
-                                <rect key="frame" x="580" y="595" width="286" height="106"/>
+                                <rect key="frame" x="810" y="603" width="286" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="button.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -315,6 +328,16 @@
                                     <action selector="continueButtonClicked:" destination="gXM-D4-QKM" eventType="touchUpInside" id="aW9-6G-Sdp"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hVk-d9-E53">
+                                <rect key="frame" x="-71" y="603" width="286" height="106"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="backButton.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButton:" destination="gXM-D4-QKM" eventType="touchUpInside" id="67T-2D-PAe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -323,6 +346,7 @@
                     <connections>
                         <outlet property="aButton" destination="tmI-BE-Pa3" id="wu5-Xk-k7o"/>
                         <outlet property="bButton" destination="uRz-q0-ymG" id="FRg-Ih-e4k"/>
+                        <outlet property="backButton" destination="hVk-d9-E53" id="Ynk-Bw-Qb1"/>
                         <outlet property="cButton" destination="qjr-5y-CRc" id="d1O-pe-0hJ"/>
                         <outlet property="continueButton" destination="MKy-ah-ITO" id="XRI-zp-kKm"/>
                         <outlet property="continueButton2" destination="pDw-3f-TpV" id="pmd-ih-gYL"/>
@@ -330,6 +354,7 @@
                         <outlet property="image" destination="DH4-A0-atO" id="Uz0-00-zDo"/>
                         <outlet property="toModule2" destination="vgp-RC-Gs1" id="zgo-Tj-Pl6"/>
                         <segue destination="lbi-H0-qiS" kind="modal" identifier="toModule3" id="vdy-PG-f9k"/>
+                        <segue destination="FmM-Nh-Zmb" kind="modal" identifier="backToModule2" id="rjH-uA-0lL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7cI-ho-6nI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -370,9 +395,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9A8-Om-fp6">
-                                <rect key="frame" x="356" y="403" width="365" height="184"/>
+                                <rect key="frame" x="454" y="413" width="365" height="184"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="beginModule1.png">
+                                <state key="normal" image="button.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -407,7 +432,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Module3Q1C.png" id="9OT-G5-E7Z">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Module3Completed.png" id="9OT-G5-E7Z">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -452,7 +477,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iyv-9t-hgM">
-                                <rect key="frame" x="580" y="595" width="286" height="106"/>
+                                <rect key="frame" x="810" y="605" width="286" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="button.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -481,6 +506,16 @@
                                     <action selector="continueButtonClicked:" destination="C74-mn-jA0" eventType="touchUpInside" id="EIX-VA-zsh"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4eq-o0-A3e">
+                                <rect key="frame" x="-66" y="605" width="286" height="106"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="backButton.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButton:" destination="C74-mn-jA0" eventType="touchUpInside" id="UWJ-ST-aRy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -489,6 +524,7 @@
                     <connections>
                         <outlet property="aButton" destination="Iyz-uf-B8C" id="0Ny-z6-fd6"/>
                         <outlet property="bButton" destination="yD0-AE-qYa" id="h2p-gO-oSB"/>
+                        <outlet property="backButton" destination="4eq-o0-A3e" id="kyK-hc-kR5"/>
                         <outlet property="cButton" destination="enL-yF-hhN" id="3Nb-2B-1JW"/>
                         <outlet property="continueButton" destination="1fY-9L-Ckn" id="jE5-hB-RUj"/>
                         <outlet property="continueButton2" destination="NXR-OC-Vxw" id="oHK-mz-rBH"/>
@@ -496,6 +532,7 @@
                         <outlet property="image" destination="9OT-G5-E7Z" id="kfv-hK-YIr"/>
                         <outlet property="toModule2" destination="iyv-9t-hgM" id="33N-4V-fFW"/>
                         <segue destination="zet-Xc-laB" kind="modal" identifier="toModule4" id="36v-kZ-C8l"/>
+                        <segue destination="lbi-H0-qiS" kind="modal" identifier="backToModule3" id="tTB-ca-np3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a1S-YZ-WDX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -509,10 +546,38 @@
                     <view key="view" contentMode="scaleToFill" id="mKx-TB-rcx">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Module4.png" id="XI7-oR-yKJ">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hAc-IG-gv8">
+                                <rect key="frame" x="623" y="596" width="224" height="106"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="button.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startModule:" destination="zet-Xc-laB" eventType="touchUpInside" id="LyS-n9-6z3"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PVc-OS-yJA">
+                                <rect key="frame" x="406" y="459" width="211" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="warningContinue.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="warningContinue:" destination="zet-Xc-laB" eventType="touchUpInside" id="Fmz-h4-hPg"/>
+                                </connections>
+                            </button>
+                        </subviews>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="continueButton" destination="hAc-IG-gv8" id="GAq-fz-mwX"/>
+                        <outlet property="introImage" destination="XI7-oR-yKJ" id="Edw-9y-r6M"/>
                         <segue destination="e9h-cF-Jko" kind="modal" identifier="toVideoQuiz" id="Yal-Kl-i8l"/>
                     </connections>
                 </viewController>
@@ -659,7 +724,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Qv8-4a-yaz">
-                                <rect key="frame" x="435" y="674" width="155" height="54"/>
+                                <rect key="frame" x="531" y="659" width="173" height="89"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="beginButton.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -727,6 +792,10 @@
                                     <segue destination="qvl-As-lyL" kind="modal" identifier="toModule1" id="kSO-wR-zuS"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipeCopy.png" id="SgO-GK-LBY">
+                                <rect key="frame" x="237" y="170" width="551" height="184"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -735,118 +804,13 @@
                         <outlet property="penguin" destination="tyj-fx-jBQ" id="UfD-fE-wgM"/>
                         <outlet property="space" destination="ZSN-8O-DE3" id="6ap-SY-kmJ"/>
                         <outlet property="swipe_image" destination="7yX-GT-S4Q" id="QfQ-gC-qcB"/>
+                        <outlet property="techCopy" destination="SgO-GK-LBY" id="pU5-5m-b65"/>
                         <outlet property="toModule1" destination="33K-dy-pNW" id="xqx-5Z-9Bk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eRX-Yv-C7Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1468" y="-3059"/>
-        </scene>
-        <!--Module2 Quiz-->
-        <scene sceneID="kup-FC-Pc8">
-            <objects>
-                <viewController id="G3A-Ey-6dT" customClass="Module2Quiz" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Qx1-D6-g4S">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.png" id="Bd4-63-V7O">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Module2Q1.png" id="4xb-2o-glz">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wjL-p3-VgZ">
-                                <rect key="frame" x="248" y="496" width="286" height="106"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="aClicked:" destination="G3A-Ey-6dT" eventType="touchUpInside" id="kSk-ng-pFX"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1Cr-N5-mnB">
-                                <rect key="frame" x="636" y="496" width="286" height="106"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="cClicked:" destination="G3A-Ey-6dT" eventType="touchUpInside" id="dkR-pB-a4P"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Ze-aI-szb">
-                                <rect key="frame" x="269" y="596" width="286" height="106"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="bClicked:" destination="G3A-Ey-6dT" eventType="touchUpInside" id="8G3-at-GNJ"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4Iw-SX-kFu">
-                                <rect key="frame" x="460" y="673" width="286" height="106"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="continueButtonClicked:" destination="G3A-Ey-6dT" eventType="touchUpInside" id="i59-Kb-E0o"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IlG-mb-kcp">
-                                <rect key="frame" x="580" y="595" width="286" height="106"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="toModule2:" destination="G3A-Ey-6dT" eventType="touchUpInside" id="vrE-CY-chO"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nU8-9l-GQc">
-                                <rect key="frame" x="665" y="596" width="286" height="106"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="dClicked:" destination="G3A-Ey-6dT" eventType="touchUpInside" id="fBv-wU-Q6L"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DEn-eh-i0s">
-                                <rect key="frame" x="467" y="599" width="286" height="106"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="continueButtonClicked:" destination="G3A-Ey-6dT" eventType="touchUpInside" id="lbj-g3-RBn"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
-                    <connections>
-                        <outlet property="aButton" destination="wjL-p3-VgZ" id="sXI-dm-O6c"/>
-                        <outlet property="bButton" destination="9Ze-aI-szb" id="rkE-KD-Wl6"/>
-                        <outlet property="cButton" destination="1Cr-N5-mnB" id="bQJ-OD-vBV"/>
-                        <outlet property="continueButton" destination="4Iw-SX-kFu" id="tIR-6n-Qyj"/>
-                        <outlet property="continueButton2" destination="DEn-eh-i0s" id="Lf4-eM-32u"/>
-                        <outlet property="dButton" destination="nU8-9l-GQc" id="GdI-o3-34E"/>
-                        <outlet property="image" destination="4xb-2o-glz" id="MZk-Pd-nkP"/>
-                        <outlet property="toModule2" destination="IlG-mb-kcp" id="pAS-hh-tBa"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tZG-w5-0Yy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1300" y="439"/>
         </scene>
         <!--Video Quiz-->
         <scene sceneID="ANh-su-352">
@@ -945,7 +909,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ModuleCompleted.png" id="q6B-ih-joR">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Q1.png" id="q6B-ih-joR">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -1036,6 +1000,36 @@
                                     <action selector="cClicked:" destination="wef-Qu-m5Z" eventType="touchUpInside" id="sX5-Uh-VzR"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wiq-5x-mpy">
+                                <rect key="frame" x="250" y="655" width="200" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="negativeButton.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="aClicked:" destination="wef-Qu-m5Z" eventType="touchUpInside" id="rQt-so-N0N"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="huI-Wy-OIc">
+                                <rect key="frame" x="445" y="659" width="151" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="positiveButton.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="bClicked:" destination="wef-Qu-m5Z" eventType="touchUpInside" id="rmX-QQ-SJu"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6gq-Er-uRH">
+                                <rect key="frame" x="627" y="649" width="283" height="78"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="invasiveButton.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cClicked:" destination="wef-Qu-m5Z" eventType="touchUpInside" id="snm-6z-g1I"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1050,6 +1044,9 @@
                         <outlet property="eButton" destination="e4y-vc-voP" id="iao-cK-d4b"/>
                         <outlet property="fButton" destination="qz0-X7-XIe" id="ALa-Ot-ryc"/>
                         <outlet property="image" destination="q6B-ih-joR" id="uCj-Oa-x6S"/>
+                        <outlet property="invButton" destination="6gq-Er-uRH" id="AgJ-eV-h9q"/>
+                        <outlet property="negButton" destination="wiq-5x-mpy" id="phJ-uI-Im4"/>
+                        <outlet property="posButton" destination="huI-Wy-OIc" id="JFh-z3-gc5"/>
                         <outlet property="scoreLabel" destination="cOf-Tk-PV7" id="1kH-Dg-USZ"/>
                         <outlet property="toTest" destination="LRq-jO-9Eh" id="F2C-ji-FLn"/>
                     </connections>
@@ -1065,16 +1062,17 @@
         <image name="Module1.png" width="778" height="538"/>
         <image name="Module1Q1.png" width="777" height="537"/>
         <image name="Module2.png" width="777" height="537"/>
-        <image name="Module2Q1.png" width="777" height="537"/>
+        <image name="Module2Completed.png" width="777" height="537"/>
         <image name="Module3.png" width="587" height="405"/>
-        <image name="Module3Q1C.png" width="777" height="537"/>
-        <image name="ModuleCompleted.png" width="777" height="537"/>
+        <image name="Module3Completed.png" width="777" height="537"/>
+        <image name="Module4.png" width="777" height="537"/>
+        <image name="Q1.png" width="777" height="537"/>
+        <image name="backButton.png" width="169" height="106"/>
         <image name="background.png" width="777" height="537"/>
-        <image name="beginButton.png" width="176" height="65"/>
-        <image name="beginModule1.png" width="286" height="106"/>
+        <image name="beginButton.png" width="213" height="112"/>
         <image name="button.png" width="169" height="106"/>
         <image name="continueButton.png" width="200" height="65"/>
-        <image name="continueToQuiz.png" width="286" height="65"/>
+        <image name="continueToQuiz.png" width="315" height="72"/>
         <image name="demoSurvey.png" width="1024" height="2422"/>
         <image name="invasiveButton.png" width="267" height="64"/>
         <image name="neg1.png" width="777" height="537"/>
@@ -1083,9 +1081,11 @@
         <image name="positiveButton.png" width="151" height="61"/>
         <image name="submitButton.png" width="176" height="65"/>
         <image name="swipe.png" width="289" height="186"/>
+        <image name="swipeCopy.png" width="420" height="123"/>
         <image name="tech.png" width="574" height="431"/>
         <image name="techBox.png" width="574" height="431"/>
         <image name="toModule1.png" width="377" height="84"/>
+        <image name="warningContinue.png" width="306" height="86"/>
         <image name="white.png" width="574" height="431"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -1093,4 +1093,9 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="AlL-ML-htN"/>
+        <segue reference="rjH-uA-0lL"/>
+        <segue reference="tTB-ca-np3"/>
+    </inferredMetricsTieBreakers>
 </document>

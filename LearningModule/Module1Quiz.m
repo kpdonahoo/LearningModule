@@ -8,7 +8,7 @@
 
 #import "Module1Quiz.h"
 
-@interface Module1Quiz ()
+@interface Module1Quiz () <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UIButton *aButton;
 @property (weak, nonatomic) IBOutlet UIButton *bButton;
@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 @property (weak, nonatomic) IBOutlet UIButton *toModule2;
 @property (weak, nonatomic) IBOutlet UIButton *continueButton2;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
 
 
 @end
@@ -24,7 +25,7 @@
 @implementation Module1Quiz
 NSArray *answers;
 NSArray *questions;
-NSArray *correct;
+NSArray *correct_answers;
 NSArray *incorrect;
 int questions_index;
 @synthesize image;
@@ -35,6 +36,8 @@ int questions_index;
 @synthesize continueButton;
 @synthesize continueButton2;
 @synthesize toModule2;
+UIAlertView *alert;
+@synthesize backButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,10 +52,11 @@ int questions_index;
     dButton.layer.borderWidth=1.0f;
     dButton.layer.borderColor=[[UIColor blackColor] CGColor];
     */
+    
     answers = @[@"b",@"a",@"a"];
     questions = @[@"Module1Q1.png",@"Module1Q2.png",@"Module1Q3.png"];
     incorrect = @[@"Module1Q1I.png",@"Module1Q2I.png",@"Module1Q3I.png"];
-    correct = @[@"Module1Q1C.png",@"Module1Q2C.png",@"Module1Q3C.png"];
+    correct_answers = @[@"Module1Q1C.png",@"Module1Q2C.png",@"Module1Q3C.png"];
     
     image.image = [UIImage imageNamed:[questions objectAtIndex:0]];
     [self performSelector:@selector(hideAD) withObject:nil afterDelay:.5];
@@ -95,7 +99,7 @@ int questions_index;
         [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
         [[self.image layer] addAnimation:animation forKey:nil];
         
-        image.image = [UIImage imageNamed:[correct objectAtIndex:questions_index]];
+        image.image = [UIImage imageNamed:[correct_answers objectAtIndex:questions_index]];
         
     } else {
         [self performSelector:@selector(hideButtonOne) withObject:nil afterDelay:.5];
@@ -153,10 +157,23 @@ int questions_index;
         continueButton.hidden = YES;
     }
 }
+- (IBAction)toModule1:(id)sender {
+    [self performSegueWithIdentifier:@"toModule1" sender:self];
+}
 
 - (IBAction)toModule2:(id)sender {
-    [self performSegueWithIdentifier:@"toModule2" sender:self];
+    alert = [[UIAlertView alloc] initWithTitle:@"Warning!" message:@"\nModule 2 contains graphic content."  delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:nil];
+    alert.tag = 1;
+    [alert show];
 }
+
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    [self performSegueWithIdentifier:@"toModule2" sender:self];
+    
+}
+
+
 
 -(void) hideButtonOne {
     CATransition *animation = [CATransition animation];
@@ -195,7 +212,9 @@ int questions_index;
     animation.type = kCATransitionFade;
     animation.duration = 0.3;
     [toModule2.layer addAnimation:animation forKey:nil];
+    [backButton.layer addAnimation:animation forKey:nil];
     toModule2.hidden = NO;
+    backButton.hidden = NO;
 }
 -(void) hideAD {
     CATransition *animation = [CATransition animation];

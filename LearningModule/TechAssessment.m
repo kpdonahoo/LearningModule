@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *swipe_image;
 @property (weak, nonatomic) IBOutlet UIButton *penguin;
 @property (weak, nonatomic) IBOutlet UIButton *toModule1;
+@property (weak, nonatomic) IBOutlet UIImageView *techCopy;
 
 @end
 
@@ -21,6 +22,7 @@
 @synthesize swipe_image;
 @synthesize penguin;
 @synthesize toModule1;
+@synthesize techCopy;
 int swipedLeft = 0;
 
 - (void)viewDidLoad {
@@ -44,14 +46,28 @@ int swipedLeft = 0;
     
     if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
         swipedLeft = 1;
+        swipe_image.image = [UIImage imageNamed:@"swipeLeft"];
     }
     if (swipe.direction == UISwipeGestureRecognizerDirectionRight && swipedLeft == 1)  {
-        swipe_image.image= [UIImage imageNamed:@"click.png"];
-        penguin.hidden = NO;
+        swipe_image.image = [UIImage imageNamed:@"swipeRight"];
+        [self performSelector:@selector(delaySwipe) withObject:nil afterDelay:.5];
+        
     }
 }
+
+-(void) delaySwipe {
+    CATransition *animation = [CATransition animation];
+    animation.type = kCATransitionFade;
+    animation.duration = 0.3;
+    [swipe_image.layer addAnimation:animation forKey:nil];
+    swipe_image.image= [UIImage imageNamed:@"click.png"];
+    techCopy.image= [UIImage imageNamed:@"clickCopy.png"];
+    penguin.hidden = NO;
+}
+
 - (IBAction)penguinClicked:(id)sender {
     penguin.hidden = TRUE;
+    techCopy.hidden = YES;
     swipe_image.frame = CGRectMake(223,195,578,440);
     swipe_image.image = [UIImage imageNamed:@"techBoxLast.png"];
     

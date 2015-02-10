@@ -17,13 +17,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 @property (weak, nonatomic) IBOutlet UIButton *toModule2;
 @property (weak, nonatomic) IBOutlet UIButton *continueButton2;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
 @end
 
 @implementation Module3Quiz
 
 NSArray *answers;
 NSArray *questions;
-NSArray *correct;
+NSArray *correctAnswers;
 NSArray *incorrect;
 int questions_index;
 @synthesize image;
@@ -34,6 +35,7 @@ int questions_index;
 @synthesize continueButton;
 @synthesize continueButton2;
 @synthesize toModule2;
+@synthesize backButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,7 +53,7 @@ int questions_index;
     answers = @[@"b",@"b",@"a"];
     questions = @[@"Module3Q1.png",@"Module3Q2.png",@"Module3Q3.png"];
     incorrect = @[@"Module3Q1I.png",@"Module3Q2I.png",@"Module3Q3I.png"];
-    correct = @[@"Module3Q1C.png",@"Module3Q2C.png",@"Module3Q3C.png"];
+    correctAnswers = @[@"Module3Q1C.png",@"Module3Q2C.png",@"Module3Q3C.png"];
     
     image.image = [UIImage imageNamed:[questions objectAtIndex:0]];
     [self performSelector:@selector(hideAD) withObject:nil afterDelay:.5];
@@ -94,7 +96,7 @@ int questions_index;
         [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
         [[self.image layer] addAnimation:animation forKey:nil];
         
-        image.image = [UIImage imageNamed:[correct objectAtIndex:questions_index]];
+        image.image = [UIImage imageNamed:[correctAnswers objectAtIndex:questions_index]];
         
     } else {
         [self performSelector:@selector(hideButtonOne) withObject:nil afterDelay:.5];
@@ -204,7 +206,9 @@ int questions_index;
     animation.type = kCATransitionFade;
     animation.duration = 0.3;
     [toModule2.layer addAnimation:animation forKey:nil];
+    [backButton.layer addAnimation:animation forKey:nil];
     toModule2.hidden = NO;
+    backButton.hidden = NO;
 }
 -(void) hideAD {
     CATransition *animation = [CATransition animation];
@@ -217,6 +221,9 @@ int questions_index;
     dButton.hidden = NO;
 }
 
+- (IBAction)backButton:(id)sender {
+    [self performSegueWithIdentifier:@"backToModule3" sender:self];
+}
 
 /*
  #pragma mark - Navigation

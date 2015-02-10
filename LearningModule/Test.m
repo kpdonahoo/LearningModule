@@ -19,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *dButton;
 @property (weak, nonatomic) IBOutlet UIButton *eButton;
 @property (weak, nonatomic) IBOutlet UIButton *fButton;
+@property (weak, nonatomic) IBOutlet UIButton *negButton;
+@property (weak, nonatomic) IBOutlet UIButton *posButton;
+@property (weak, nonatomic) IBOutlet UIButton *invButton;
 
 @end
 
@@ -38,6 +41,9 @@ int correct = 0;
 @synthesize continueButton;
 @synthesize toTest;
 @synthesize scoreLabel;
+@synthesize negButton;
+@synthesize posButton;
+@synthesize invButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -184,9 +190,6 @@ int correct = 0;
             dButton.hidden = YES;
             eButton.hidden = YES;
             fButton.hidden = YES;
-            aButton.imageView.image = [UIImage imageNamed:@"negativeButton.png"];
-            bButton.imageView.image = [UIImage imageNamed:@"positiveButton.png"];
-            cButton.imageView.image = [UIImage imageNamed:@"invasiveButton.png"];
             [self performSelector:@selector(rest) withObject:nil afterDelay:.5];
         }
         
@@ -214,6 +217,9 @@ int correct = 0;
         bButton.hidden = YES;
         cButton.hidden = YES;
         dButton.hidden = YES;
+        negButton.hidden = YES;
+        posButton.hidden = YES;
+        invButton.hidden = YES;
         
     }
 
@@ -330,12 +336,9 @@ int correct = 0;
 }
 
 -(void) rest {
-    aButton.frame = CGRectMake(247,642,187,93);
-    bButton.frame = CGRectMake(419,649,187,93);
-    cButton.frame = CGRectMake(610,649,272,93);
-    aButton.hidden = NO;
-    bButton.hidden = NO;
-    cButton.hidden = NO;
+    negButton.hidden = NO;
+    posButton.hidden = NO;
+    invButton.hidden = NO;
 }
 
 
