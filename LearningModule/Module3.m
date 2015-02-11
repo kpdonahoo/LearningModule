@@ -26,14 +26,14 @@ NSArray *images;
 int image_index;
 int pageViews[11];
 NSMutableArray *timePerPage;
-NSTimeInterval total;
+NSTimeInterval total3;
 NSTimer *transitionTimer;
 NSDate* startDate;
 
 
 - (NSNumber*)cancelTimer {
     NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
-    total +=elapsedTime;
+    total3 +=elapsedTime;
     NSNumber *currentTime = [NSNumber numberWithDouble:elapsedTime];
     [transitionTimer invalidate];
     return currentTime;
@@ -72,18 +72,6 @@ NSDate* startDate;
     image_index = 0;
     
     images = @[@"Module3-1.png",@"Module3-2.png",@"Module3-3.png",@"Module3-4.png",@"Module3-5.png",@"Module3-6.png",@"Module3-7.png",@"Module3-8.png",@"Module3-9.png",@"Module3-10.png",@"Module3-11.png"];
-    
-    
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    
-    // Setting the swipe direction.
-    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
-    
-    // Adding the swipe gesture on image view
-    [image addGestureRecognizer:swipeLeft];
-    [image addGestureRecognizer:swipeRight];
 }
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
@@ -210,6 +198,18 @@ NSDate* startDate;
 }
 
 - (IBAction)beginModule:(id)sender {
+    
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    
+    // Setting the swipe direction.
+    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    
+    // Adding the swipe gesture on image view
+    [image addGestureRecognizer:swipeLeft];
+    [image addGestureRecognizer:swipeRight];
+    
     image.image = [UIImage imageNamed:[images objectAtIndex:image_index]];
     beginModuleButton.hidden = YES;
     pageLabel.text = [NSString stringWithFormat:@"%i",image_index+1];
@@ -229,9 +229,9 @@ NSDate* startDate;
     NSLog(@"SENDING TO SERVER:");
     for (int i = 0; i < 11; i++) {
         NSLog(@"Visited page %i %i times and spent %@ seconds  there.",i+1,pageViews[i],[timePerPage objectAtIndex:i]);
-        //NSLog(@"Page %i Views: %d",i,pageViews[i]);
-        //NSLog(@"Time On %i Page: %@",i,[timePerPage objectAtIndex:i]);
     }
+    
+    NSLog(@"Total time for Module 3: %f",total3);
 
     [self performSegueWithIdentifier: @"toQuiz3" sender: self];
 }

@@ -30,15 +30,6 @@ UIAlertView *alert;
     alert.tag = 1;
     [alert show];
     
-    /*continueButton.hidden = YES;
-    CATransition *animation = [CATransition animation];
-    animation.type = kCATransitionFade;
-    animation.duration = 0.5;
-    [introImage.layer addAnimation:animation forKey:nil];
-    introImage.image = [UIImage imageNamed:@"Module4Alert"];
-    continueButton.hidden = YES;*/
-    
-    
 }
 
 - (IBAction)warningContinue:(id)sender {
@@ -78,7 +69,7 @@ UIAlertView *alert;
         NSLog(@"Stopped");
     }if (player.playbackState == MPMoviePlaybackStatePaused)
     {
-        NSLog(@"Paused");
+        NSLog(@"Paused at %f",player.playableDuration);
     }if (player.playbackState == MPMoviePlaybackStateInterrupted)
     {
         NSLog(@"Interrupted");

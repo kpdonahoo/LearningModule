@@ -30,10 +30,37 @@ int questions_index;
 @synthesize cButton;
 @synthesize continueButton;
 @synthesize toTest;
+NSMutableArray *timePerQuizPage4;
+NSNumber *sum4;
+NSTimer *transitionTimer;
+NSDate* startDate;
+NSMutableArray *answersToQuiz;
+
+- (NSNumber*)cancelTimer {
+    NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
+    NSNumber *currentTime = [NSNumber numberWithDouble:elapsedTime];
+    [transitionTimer invalidate];
+    return currentTime;
+}
+
+- (void)startTimer {
+    startDate = [NSDate date];
+    [self startTimerMethod];
+}
+
+- (void) startTimerMethod {
+    transitionTimer = [NSTimer scheduledTimerWithTimeInterval:3600.0 target:self selector:nil userInfo:nil repeats:NO];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     questions_index = 0;
+    
+    timePerQuizPage4 = [[NSMutableArray alloc] init];
+    
+    answersToQuiz = [[NSMutableArray alloc] init];
+    
+    [self startTimer];
     
     answers = @[@"a",@"c",@"b",@"a",@"a",@"c",@"b",@"c",@"b"];
     questions = @[@"neg1.png",@"inv1.png",@"pos1.png",@"neg2.png",@"neg3.png",@"inv3.png",@"pos2.png",@"inv2.png",@"pos3.png"];
@@ -62,11 +89,17 @@ int questions_index;
 
 -(void) checkAnswer:(NSString *) answer {
     
+    
+    NSNumber *currentTime = [self cancelTimer];
+    [timePerQuizPage4 addObject:currentTime];
+    [self startTimer];
+    
     aButton.hidden = YES;
     bButton.hidden = YES;
     cButton.hidden = YES;
     
     if ([answer isEqualToString:[answers objectAtIndex:questions_index]]) {
+        [answersToQuiz addObject:@"correct"];
         CATransition *animation = [CATransition animation];
         [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
         [animation setType:kCATransitionPush]; //New image will push the old image off
@@ -77,6 +110,7 @@ int questions_index;
         image.image = [UIImage imageNamed:[correct objectAtIndex:questions_index]];
         
     } else {
+        [answersToQuiz addObject:@"incorrect"];
         CATransition *animation = [CATransition animation];
         [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
         [animation setType:kCATransitionPush]; //New image will push the old image off
@@ -93,6 +127,15 @@ int questions_index;
 }
 
 - (IBAction)continueButtonClicked:(id)sender {
+    
+    if (questions_index < 8) {
+        NSNumber *currentTime = [self cancelTimer];
+        [timePerQuizPage4 addObject:currentTime];
+        [self startTimer];
+    } else {
+        NSNumber *currentTime = [self cancelTimer];
+        [timePerQuizPage4 addObject:currentTime];
+    }
     
     if(questions_index <=7) {
         questions_index++;
@@ -128,6 +171,20 @@ int questions_index;
 }
 
 - (IBAction)toTest:(id)sender {
+    /*SEND TO SERVER HERE*/
+    NSLog(@"SENDING TO SERVER:");
+    
+    for (int counter = 0; counter < 9; counter++) {
+        NSLog(@"Question %i: %@",counter+1,[answersToQuiz objectAtIndex:counter]);
+    }
+    
+    for (int i = 0; i < 18; i++) {
+        NSLog(@"Spent %@ seconds on %i.",[timePerQuizPage4 objectAtIndex:i],i+1);
+        NSNumber *currentTotal = [timePerQuizPage4 objectAtIndex:i];
+        sum4 = [NSNumber numberWithFloat:([sum4 floatValue] + [currentTotal floatValue])];
+    }
+    NSLog(@"Total time for Video Quiz: %@",sum4);
+    
     [self performSegueWithIdentifier:@"toTest" sender:self];
 }
 

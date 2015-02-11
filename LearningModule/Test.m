@@ -44,11 +44,40 @@ int numberCorrect = 0;
 @synthesize negButton;
 @synthesize posButton;
 @synthesize invButton;
+NSMutableArray *timePerTestPage;
+NSNumber *sum5;
+NSTimer *transitionTimer;
+NSDate* startDate;
+NSMutableArray *answersToTest;
+NSMutableArray *correctVincorrect;
+
+- (NSNumber*)cancelTimer {
+    NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
+    NSNumber *currentTime = [NSNumber numberWithDouble:elapsedTime];
+    [transitionTimer invalidate];
+    return currentTime;
+}
+
+- (void)startTimer {
+    startDate = [NSDate date];
+    [self startTimerMethod];
+}
+
+- (void) startTimerMethod {
+    transitionTimer = [NSTimer scheduledTimerWithTimeInterval:3600.0 target:self selector:nil userInfo:nil repeats:NO];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     userAnswers = [[NSMutableArray alloc] init];
+    
+    timePerTestPage = [[NSMutableArray alloc] init];
+    
+    correctVincorrect = [[NSMutableArray alloc] init];
+    
+    [self startTimer];
     
     questions_index = 0;
     
@@ -100,7 +129,11 @@ int numberCorrect = 0;
 }
 
 -(void) continueTest {
+    
     if(questions_index <=14) {
+        NSNumber *currentTime = [self cancelTimer];
+        [timePerTestPage addObject:currentTime];
+        [self startTimer];
         questions_index++;
         CATransition *animation = [CATransition animation];
         [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
@@ -195,16 +228,17 @@ int numberCorrect = 0;
         
     } else {
         
+        NSNumber *currentTime = [self cancelTimer];
+        [timePerTestPage addObject:currentTime];
+        
         for (int counter = 0; counter < [answers count]; counter++) {
             if([[answers objectAtIndex:counter] isEqualToString:[userAnswers objectAtIndex:counter]]) {
+                [correctVincorrect addObject:@"correct"];
                 numberCorrect++;
+            } else {
+                [correctVincorrect addObject:@"incorrect"];
             }
         }
-        
-        NSLog(@"Score: %i/%i",numberCorrect,16);
-        int score = numberCorrect/16;
-        
-        scoreLabel.text = [NSString stringWithFormat:@"%i",score];
         
         CATransition *animation = [CATransition animation];
         [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
@@ -221,6 +255,27 @@ int numberCorrect = 0;
         negButton.hidden = YES;
         posButton.hidden = YES;
         invButton.hidden = YES;
+        
+        /*SEND TO SERVER HERE*/
+        NSLog(@"SENDING TO SERVER:");
+        
+        for (int counter = 0; counter < 15; counter++) {
+            NSLog(@"Question %i: %@",counter+1,[correctVincorrect objectAtIndex:counter]);
+        }
+        
+        for (int i = 0; i < 15; i++) {
+            NSLog(@"Spent %@ seconds on %i.",[timePerTestPage objectAtIndex:i],i+1);
+            NSNumber *currentTotal = [timePerTestPage objectAtIndex:i];
+            sum5 = [NSNumber numberWithFloat:([sum5 floatValue] + [currentTotal floatValue])];
+        }
+        NSLog(@"Total time for Test: %@",sum5);
+        
+        int score = numberCorrect/16.0 * 100.0;
+        
+        NSLog(@"Score: %i",score);
+        
+        scoreLabel.font = [UIFont fontWithName:@"PTSans-Regular" size:60];
+        scoreLabel.text = [NSString stringWithFormat:@"%d",score];
         
     }
 

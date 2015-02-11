@@ -37,20 +37,36 @@ int questions_index;
 @synthesize toModule2;
 @synthesize backButton;
 UIAlertView *alert;
+NSMutableArray *timePerQuizPage2;
+NSNumber *sum2;
+NSTimer *transitionTimer;
+NSDate* startDate;
+NSMutableArray *answersToQuiz;
+
+- (NSNumber*)cancelTimer {
+    NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
+    NSNumber *currentTime = [NSNumber numberWithDouble:elapsedTime];
+    [transitionTimer invalidate];
+    return currentTime;
+}
+
+- (void)startTimer {
+    startDate = [NSDate date];
+    [self startTimerMethod];
+}
+
+- (void) startTimerMethod {
+    transitionTimer = [NSTimer scheduledTimerWithTimeInterval:3600.0 target:self selector:nil userInfo:nil repeats:NO];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     questions_index = 0;
     
-    /* aButton.layer.borderWidth=1.0f;
-     aButton.layer.borderColor=[[UIColor blackColor] CGColor];
-     bButton.layer.borderWidth=1.0f;
-     bButton.layer.borderColor=[[UIColor blackColor] CGColor];
-     cButton.layer.borderWidth=1.0f;
-     cButton.layer.borderColor=[[UIColor blackColor] CGColor];
-     dButton.layer.borderWidth=1.0f;
-     dButton.layer.borderColor=[[UIColor blackColor] CGColor];
-     */
+    timePerQuizPage2 = [[NSMutableArray alloc] init];
+    
+    answersToQuiz = [[NSMutableArray alloc] init];
+    
     answers = @[@"d",@"a",@"b"];
     questions = @[@"Module2Q1.png",@"Module2Q2.png",@"Module2Q3.png"];
     incorrect = @[@"Module2Q1I.png",@"Module2Q2I.png",@"Module2Q3I.png"];
@@ -58,6 +74,8 @@ UIAlertView *alert;
     
     image.image = [UIImage imageNamed:[questions objectAtIndex:0]];
     [self performSelector:@selector(hideAD) withObject:nil afterDelay:.5];
+    
+     [self startTimer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,12 +101,17 @@ UIAlertView *alert;
 
 -(void) checkAnswer:(NSString *) answer {
     
+    NSNumber *currentTime = [self cancelTimer];
+    [timePerQuizPage2 addObject:currentTime];
+    [self startTimer];
+    
     aButton.hidden = YES;
     bButton.hidden = YES;
     cButton.hidden = YES;
     dButton.hidden = YES;
     
     if ([answer isEqualToString:[answers objectAtIndex:questions_index]]) {
+        [answersToQuiz addObject:@"correct"];
         [self performSelector:@selector(hideButtonTwo) withObject:nil afterDelay:.5];
         CATransition *animation = [CATransition animation];
         [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
@@ -100,6 +123,7 @@ UIAlertView *alert;
         image.image = [UIImage imageNamed:[correctAnswers objectAtIndex:questions_index]];
         
     } else {
+        [answersToQuiz addObject:@"incorrect"];
         [self performSelector:@selector(hideButtonOne) withObject:nil afterDelay:.5];
         CATransition *animation = [CATransition animation];
         [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
@@ -115,6 +139,15 @@ UIAlertView *alert;
 }
 
 - (IBAction)continueButtonClicked:(id)sender {
+    
+    if (questions_index < 2) {
+        NSNumber *currentTime = [self cancelTimer];
+        [timePerQuizPage2 addObject:currentTime];
+        [self startTimer];
+    } else {
+        NSNumber *currentTime = [self cancelTimer];
+        [timePerQuizPage2 addObject:currentTime];
+    }
     
     if(questions_index <=1) {
         questions_index++;
@@ -173,6 +206,21 @@ UIAlertView *alert;
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    /*SEND TO SERVER HERE*/
+    NSLog(@"SENDING TO SERVER:");
+    
+    for (int counter = 0; counter < 3; counter++) {
+        NSLog(@"Question %i: %@",counter+1,[answersToQuiz objectAtIndex:counter]);
+    }
+    
+    for (int i = 0; i < 6; i++) {
+        NSLog(@"Spent %@ seconds on %i.",[timePerQuizPage2 objectAtIndex:i],i+1);
+        NSNumber *currentTotal = [timePerQuizPage2 objectAtIndex:i];
+        sum2 = [NSNumber numberWithFloat:([sum2 floatValue] + [currentTotal floatValue])];
+    }
+    NSLog(@"Total time for Module 2 Quiz: %@",sum2);
+    
     [self performSegueWithIdentifier:@"toModule3" sender:self];
 }
 

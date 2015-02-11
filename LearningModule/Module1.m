@@ -64,18 +64,6 @@ NSDate* startDate;
     image_index = 0;
     
     images = @[@"Module1-1 copy.png",@"Module1-2 copy.png",@"Module1-3 copy.png",@"Module1-4 copy.png",@"Module1-5 copy.png",@"Module1-6 copy.png",@"Module1-7 copy.png",@"Module1-8 copy.png",@"Module1-9 copy.png",@"Module1-10 copy.png",@"Module1-11 copy.png",];
-    
-    
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    
-    // Setting the swipe direction.
-    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
-    
-    // Adding the swipe gesture on image view
-    [image addGestureRecognizer:swipeLeft];
-    [image addGestureRecognizer:swipeRight];
 }
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
@@ -200,6 +188,16 @@ NSDate* startDate;
 }
 
 - (IBAction)beginModule:(id)sender {
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    
+    // Setting the swipe direction.
+    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    
+    // Adding the swipe gesture on image view
+    [image addGestureRecognizer:swipeLeft];
+    [image addGestureRecognizer:swipeRight];
     image.image = [UIImage imageNamed:[images objectAtIndex:image_index]];
     beginModuleButton.hidden = YES;
     pageLabel.text = [NSString stringWithFormat:@"%i",image_index+1];
@@ -218,9 +216,8 @@ NSDate* startDate;
     NSLog(@"SENDING TO SERVER:");
     for (int i = 0; i < 11; i++) {
         NSLog(@"Visited page %i %i times and spent %@ seconds  there.",i+1,pageViews[i],[timePerPage objectAtIndex:i]);
-        //NSLog(@"Page %i Views: %d",i,pageViews[i]);
-        //NSLog(@"Time On %i Page: %@",i,[timePerPage objectAtIndex:i]);
     }
+    NSLog(@"Total time for Module 1: %f",total);
     
     
     [self performSegueWithIdentifier: @"toQuiz" sender: self];
