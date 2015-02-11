@@ -24,6 +24,38 @@
 @synthesize toModule1;
 @synthesize techCopy;
 int swipedLeft = 0;
+NSTimer *transitionTimer;
+NSDate* startDate;
+
+NSTimeInterval total;
+NSString *swipeInterval;
+NSString *clickInterval;
+NSString *continueInterval;
+NSString *totalInterval;
+
+
+
+
+-(void) viewDidAppear:(BOOL)animated {
+    [self startTimer];
+}
+
+- (NSString*)cancelTimer {
+    NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
+    total +=elapsedTime;
+    NSString *interval = [NSString stringWithFormat:@"%f", elapsedTime];
+    [transitionTimer invalidate];
+    return interval;
+}
+
+- (void)startTimer {
+    startDate = [NSDate date];
+    [self startTimerMethod];
+}
+
+- (void) startTimerMethod {
+    transitionTimer = [NSTimer scheduledTimerWithTimeInterval:3600.0 target:self selector:nil userInfo:nil repeats:NO];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,6 +82,7 @@ int swipedLeft = 0;
     }
     if (swipe.direction == UISwipeGestureRecognizerDirectionRight && swipedLeft == 1)  {
         swipe_image.image = [UIImage imageNamed:@"swipeRight"];
+        swipeInterval = [self cancelTimer];
         [self performSelector:@selector(delaySwipe) withObject:nil afterDelay:.5];
         
     }
@@ -63,9 +96,11 @@ int swipedLeft = 0;
     swipe_image.image= [UIImage imageNamed:@"click.png"];
     techCopy.image= [UIImage imageNamed:@"clickCopy.png"];
     penguin.hidden = NO;
+    [self startTimer];
 }
 
 - (IBAction)penguinClicked:(id)sender {
+    clickInterval = [self cancelTimer];
     penguin.hidden = TRUE;
     techCopy.hidden = YES;
     swipe_image.frame = CGRectMake(223,195,578,440);
@@ -76,6 +111,7 @@ int swipedLeft = 0;
     animation.duration = 1;
     [toModule1.layer addAnimation:animation forKey:nil];
     toModule1.hidden = NO;
+    [self startTimer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,6 +120,16 @@ int swipedLeft = 0;
 }
 
 - (IBAction)toModule1Clicked:(id)sender {
+    continueInterval = [self cancelTimer];
+    totalInterval = [NSString stringWithFormat:@"%f", total];
+    
+    /*SEND TO SERVER HERE*/
+    NSLog(@"SENDING TO SERVER:");
+    NSLog(@"Swipe Interval: %@",swipeInterval);
+    NSLog(@"Click Interval: %@",clickInterval);
+    NSLog(@"Continue Interval: %@",continueInterval);
+    NSLog(@"Total Interval: %@",totalInterval);
+    
     [self performSegueWithIdentifier:@"toModule1" sender:self];
 }
 

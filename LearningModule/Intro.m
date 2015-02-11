@@ -87,6 +87,7 @@ UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWit
 
 
 - (IBAction)beginClicked:(id)sender {
+    /*MAKE THE CALL TO SERVER TO GET THE PARTICIPANT ID*/
     [self performSegueWithIdentifier:@"toDemoSurvey" sender:self];
 }
 

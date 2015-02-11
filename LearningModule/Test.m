@@ -30,7 +30,7 @@ NSArray *answers;
 NSArray *questions;
 NSMutableArray *userAnswers;
 int questions_index;
-int correct = 0;
+int numberCorrect = 0;
 @synthesize image;
 @synthesize aButton;
 @synthesize bButton;
@@ -197,11 +197,12 @@ int correct = 0;
         
         for (int counter = 0; counter < [answers count]; counter++) {
             if([[answers objectAtIndex:counter] isEqualToString:[userAnswers objectAtIndex:counter]]) {
-                correct++;
+                numberCorrect++;
             }
         }
         
-        int score = correct/[answers count];
+        NSLog(@"Score: %i/%i",numberCorrect,16);
+        int score = numberCorrect/16;
         
         scoreLabel.text = [NSString stringWithFormat:@"%i",score];
         

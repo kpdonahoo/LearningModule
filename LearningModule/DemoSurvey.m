@@ -37,12 +37,23 @@ int myNumber;
 @synthesize learningDisability;
 @synthesize medicalExperience;
 @synthesize cancer;
+NSString *onlineCourse;
+NSString *genderChoice;
+NSString *ageChoice;
+NSString *deviceChoice;
+NSString *ethChoice;
+NSString *degreeChoice;
+NSString *learningChoice;
+NSString *learning;
+NSString *medical;
+NSString *cancerText;
 NSArray *genderOptions;
 NSArray *ageOptions;
 NSArray *deviceOptions;
 NSArray *degreeOptions;
 NSArray *ethnicityOptions;
 NSArray *learningOptions;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -81,18 +92,6 @@ NSArray *learningOptions;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)StartDemoSurvey:(id)sender {
-    myNumber = arc4random()%899 + 100;
-    NSLog(@"%i",myNumber);
-    scrollView.hidden = NO;
-    genderPicker.hidden = NO;
-    agePicker.hidden = NO;
-    digitalPicker.hidden = NO;
-    ethnicityPicker.hidden = NO;
-    degreePicker.hidden = NO;
-    learningPicker.hidden = NO;
 }
 
 - (long)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -143,39 +142,29 @@ NSArray *learningOptions;
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if (pickerView.tag == 0) {
-        NSString *genderChoice = [genderOptions objectAtIndex:row];
-        NSLog(@"gender: %@",genderChoice);
+        genderChoice = [genderOptions objectAtIndex:row];
     } else if (pickerView.tag == 1){
-        NSString *ageChoice = [ageOptions objectAtIndex:row];
-        NSLog(@"age: %@",ageChoice);
+        ageChoice = [ageOptions objectAtIndex:row];
     } else if (pickerView.tag == 2){
-        NSString *deviceChoice = [deviceOptions objectAtIndex:row];
-        NSLog(@"device use: %@",deviceChoice);
+        deviceChoice = [deviceOptions objectAtIndex:row];
     } else if (pickerView.tag == 3){
-        NSString *ethChoice = [ethnicityOptions objectAtIndex:row];
-        NSLog(@"ethnicity: %@",ethChoice);
+        ethChoice = [ethnicityOptions objectAtIndex:row];
     } else if (pickerView.tag == 4){
-        NSString *degreeChoice = [degreeOptions objectAtIndex:row];
-        NSLog(@"degree: %@",degreeChoice);
+        degreeChoice = [degreeOptions objectAtIndex:row];
     } else if (pickerView.tag == 5){
-        NSString *learningChoice = [learningOptions objectAtIndex:row];
-        NSLog(@"learning: %@",learningChoice);
+        learningChoice = [learningOptions objectAtIndex:row];
     }
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
     if (textView.tag == 0) {
-        NSString *onlineCourse = textView.text;
-        NSLog(@"online: %@",onlineCourse);
+        onlineCourse = textView.text;
     } else if (textView.tag == 1) {
-        NSString *learning = textView.text;
-        NSLog(@"learning: %@",learning);
+        learning = textView.text;
     } else if (textView.tag == 2) {
-        NSString *medical = textView.text;
-        NSLog(@"medical: %@",medical);
+        medical = textView.text;
     } else if (textView.tag == 3) {
-        NSString *cancer = textView.text;
-        NSLog(@"cancer: %@",cancer);
+        cancerText = textView.text;
     }
 }
 
@@ -185,8 +174,8 @@ NSArray *learningOptions;
          if (textView.tag == 3) {
               [self performSegueWithIdentifier:@"toTech" sender:self];
          } else {
-        [textView resignFirstResponder];
-        return NO;
+             [textView resignFirstResponder];
+             return NO;
          }
     }
     
@@ -194,6 +183,19 @@ NSArray *learningOptions;
 }
         
 - (IBAction)submitPressed:(id)sender {
+    /*SEND TO SERVER HERE*/
+    NSLog(@"SENDING TO SERVER:@");
+    NSLog(@"gender: %@",genderChoice);
+    NSLog(@"age: %@",ageChoice);
+    NSLog(@"device use: %@",deviceChoice);
+    NSLog(@"ethnicity: %@",ethChoice);
+    NSLog(@"degree: %@",degreeChoice);
+    NSLog(@"learning: %@",learningChoice);
+    NSLog(@"online: %@",onlineCourse);
+    NSLog(@"learning: %@",learning);
+    NSLog(@"medical: %@",medical);
+    NSLog(@"cancer: %@",cancerText);
+    
     [self performSegueWithIdentifier:@"toTech" sender:self];
 }
 
