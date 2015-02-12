@@ -172,6 +172,18 @@ NSArray *learningOptions;
 
     if([text isEqualToString:@"\n"]) {
          if (textView.tag == 3) {
+             /*SEND TO SERVER HERE*/
+             NSLog(@"SENDING TO SERVER:");
+             NSLog(@"gender: %@",genderChoice);
+             NSLog(@"age: %@",ageChoice);
+             NSLog(@"device use: %@",deviceChoice);
+             NSLog(@"ethnicity: %@",ethChoice);
+             NSLog(@"degree: %@",degreeChoice);
+             NSLog(@"learning: %@",learningChoice);
+             NSLog(@"online: %@",onlineCourse);
+             NSLog(@"learning: %@",learning);
+             NSLog(@"medical: %@",medical);
+             NSLog(@"cancer: %@",cancerText);
               [self performSegueWithIdentifier:@"toTech" sender:self];
          } else {
              [textView resignFirstResponder];
@@ -180,23 +192,6 @@ NSArray *learningOptions;
     }
     
     return YES;
-}
-        
-- (IBAction)submitPressed:(id)sender {
-    /*SEND TO SERVER HERE*/
-    NSLog(@"SENDING TO SERVER:@");
-    NSLog(@"gender: %@",genderChoice);
-    NSLog(@"age: %@",ageChoice);
-    NSLog(@"device use: %@",deviceChoice);
-    NSLog(@"ethnicity: %@",ethChoice);
-    NSLog(@"degree: %@",degreeChoice);
-    NSLog(@"learning: %@",learningChoice);
-    NSLog(@"online: %@",onlineCourse);
-    NSLog(@"learning: %@",learning);
-    NSLog(@"medical: %@",medical);
-    NSLog(@"cancer: %@",cancerText);
-    
-    [self performSegueWithIdentifier:@"toTech" sender:self];
 }
 
 @end

@@ -25,14 +25,14 @@ NSArray *images;
 int image_index;
 int pageViews[11];
 NSMutableArray *timePerPage;
-NSTimeInterval total;
+NSTimeInterval totalMod1;
 NSTimer *transitionTimer;
 NSDate* startDate;
 
 
 - (NSNumber*)cancelTimer {
     NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
-    total +=elapsedTime;
+    totalMod1 +=elapsedTime;
     NSNumber *currentTime = [NSNumber numberWithDouble:elapsedTime];
     [transitionTimer invalidate];
     return currentTime;
@@ -217,7 +217,7 @@ NSDate* startDate;
     for (int i = 0; i < 11; i++) {
         NSLog(@"Visited page %i %i times and spent %@ seconds  there.",i+1,pageViews[i],[timePerPage objectAtIndex:i]);
     }
-    NSLog(@"Total time for Module 1: %f",total);
+    NSLog(@"Total time for Module 1: %f",totalMod1);
     
     
     [self performSegueWithIdentifier: @"toQuiz" sender: self];

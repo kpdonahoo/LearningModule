@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="wef-Qu-m5Z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="zet-Xc-laB">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -669,16 +669,6 @@
                                                     <outlet property="delegate" destination="4tz-V7-Tbf" id="fpz-CJ-mJs"/>
                                                 </connections>
                                             </textView>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Lnh-GT-dRo">
-                                                <rect key="frame" x="424" y="2040" width="176" height="65"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="submitButton.png">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="submitPressed:" destination="4tz-V7-Tbf" eventType="touchUpInside" id="MPO-OZ-60G"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -909,7 +899,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Q1.png" id="q6B-ih-joR">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ModuleCompleted.png" id="q6B-ih-joR">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -1030,6 +1020,16 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xNZ-Uh-u5p">
+                                <rect key="frame" x="765" y="45" width="145" height="117"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="secretButtonClicked:" destination="wef-Qu-m5Z" eventType="touchUpInside" id="pbg-4L-wMG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1048,6 +1048,7 @@
                         <outlet property="negButton" destination="wiq-5x-mpy" id="phJ-uI-Im4"/>
                         <outlet property="posButton" destination="huI-Wy-OIc" id="JFh-z3-gc5"/>
                         <outlet property="scoreLabel" destination="cOf-Tk-PV7" id="1kH-Dg-USZ"/>
+                        <outlet property="secretButton" destination="xNZ-Uh-u5p" id="LsT-Fh-gmO"/>
                         <outlet property="toTest" destination="LRq-jO-9Eh" id="F2C-ji-FLn"/>
                     </connections>
                 </viewController>
@@ -1066,7 +1067,7 @@
         <image name="Module3.png" width="587" height="405"/>
         <image name="Module3Completed.png" width="777" height="537"/>
         <image name="Module4.png" width="777" height="537"/>
-        <image name="Q1.png" width="777" height="537"/>
+        <image name="ModuleCompleted.png" width="777" height="537"/>
         <image name="backButton.png" width="169" height="106"/>
         <image name="background.png" width="777" height="537"/>
         <image name="beginButton.png" width="213" height="112"/>
@@ -1079,7 +1080,6 @@
         <image name="negativeButton.png" width="145" height="65"/>
         <image name="penguin.png" width="68" height="93"/>
         <image name="positiveButton.png" width="151" height="61"/>
-        <image name="submitButton.png" width="176" height="65"/>
         <image name="swipe.png" width="289" height="186"/>
         <image name="swipeCopy.png" width="420" height="123"/>
         <image name="tech.png" width="574" height="431"/>

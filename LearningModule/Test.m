@@ -9,6 +9,7 @@
 #import "Test.h"
 
 @interface Test ()
+@property (weak, nonatomic) IBOutlet UIButton *secretButton;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UIButton *aButton;
@@ -44,6 +45,7 @@ int numberCorrect = 0;
 @synthesize negButton;
 @synthesize posButton;
 @synthesize invButton;
+@synthesize secretButton;
 NSMutableArray *timePerTestPage;
 NSNumber *sum5;
 NSTimer *transitionTimer;
@@ -247,6 +249,8 @@ NSMutableArray *correctVincorrect;
         [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
         [[self.image layer] addAnimation:animation forKey:nil];
         
+        secretButton.hidden = NO;
+        
         image.image = [UIImage imageNamed:@"ModuleCompleted.png"];
         aButton.hidden = YES;
         bButton.hidden = YES;
@@ -410,14 +414,11 @@ NSMutableArray *correctVincorrect;
     toTest.hidden = NO;
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
+
+- (IBAction)secretButtonClicked:(id)sender {
+    
+    NSLog(@"get participant ID for self-assessment and exit interview");
+}
 
 @end

@@ -34,6 +34,7 @@ NSDate* startDate;
 - (NSNumber*)cancelTimer {
     NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
     total3 +=elapsedTime;
+    NSLog(@"%f",total3);
     NSNumber *currentTime = [NSNumber numberWithDouble:elapsedTime];
     [transitionTimer invalidate];
     return currentTime;

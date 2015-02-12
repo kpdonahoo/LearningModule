@@ -96,6 +96,7 @@ UIAlertView *alert;
         if (buttonIndex == 0)
         {
             player.currentPlaybackTime = 0.0;
+            [player play];
             
         }
         else

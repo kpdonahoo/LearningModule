@@ -46,14 +46,12 @@ NSMutableArray *answersToQuiz;
     NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
     NSNumber *currentTime = [NSNumber numberWithDouble:elapsedTime];
     [transitionTimer invalidate];
-    NSLog(@"end timer");
     return currentTime;
 }
 
 - (void)startTimer {
     startDate = [NSDate date];
     [self startTimerMethod];
-    NSLog(@"start timer");
 }
 
 - (void) startTimerMethod {
