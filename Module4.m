@@ -20,6 +20,8 @@
 @synthesize introImage;
 @synthesize continueButton;
 UIAlertView *alert;
+float lastPlayback = 0.0;
+float currentPlayback = 0.0;
 
 - (void)viewDidLoad {
 }
@@ -62,23 +64,28 @@ UIAlertView *alert;
 {
     if (player.playbackState == MPMoviePlaybackStatePlaying)
     {
-        NSLog(@"Playing");
+        
+        currentPlayback = player.currentPlaybackTime;
+        
+        NSLog(@"Playing at %f",player.currentPlaybackTime);
+        if (currentPlayback > lastPlayback) {
+            NSLog(@"Fast Forwarded to %f",currentPlayback);
+        } else {
+            NSLog(@"Rewinded to %f",player.currentPlaybackTime);
+        }
+        
+        lastPlayback = currentPlayback;
+        
     }
+    
     if (player.playbackState == MPMoviePlaybackStateStopped)
     {
         NSLog(@"Stopped");
-    }if (player.playbackState == MPMoviePlaybackStatePaused)
+    }
+    
+    if (player.playbackState == MPMoviePlaybackStatePaused)
     {
-        NSLog(@"Paused at %f",player.playableDuration);
-    }if (player.playbackState == MPMoviePlaybackStateInterrupted)
-    {
-        NSLog(@"Interrupted");
-    }if (player.playbackState == MPMoviePlaybackStateSeekingForward)
-    {
-        NSLog(@"Seeking Forward BROKEN");
-    }if (player.playbackState == MPMoviePlaybackStateSeekingBackward)
-    {
-        NSLog(@"Seeking Backward");
+         NSLog(@"Paused at %f",player.currentPlaybackTime);
     }
     
 }

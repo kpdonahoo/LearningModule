@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="OOt-xe-5pE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="zet-Xc-laB">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -1064,7 +1064,7 @@
         <image name="Module1Q1.png" width="777" height="537"/>
         <image name="Module2.png" width="777" height="537"/>
         <image name="Module2Completed.png" width="777" height="537"/>
-        <image name="Module3.png" width="587" height="405"/>
+        <image name="Module3.png" width="1024" height="768"/>
         <image name="Module3Completed.png" width="777" height="537"/>
         <image name="Module4.png" width="777" height="537"/>
         <image name="ModuleCompleted.png" width="777" height="537"/>
