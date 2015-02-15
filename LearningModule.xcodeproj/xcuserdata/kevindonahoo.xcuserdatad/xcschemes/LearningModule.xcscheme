@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3896FF2D1A85A14400144A32"
-               BuildableName = "LearningModule.app"
+               BuildableName = "Learning Module.app"
                BlueprintName = "LearningModule"
                ReferencedContainer = "container:LearningModule.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3896FF2D1A85A14400144A32"
-            BuildableName = "LearningModule.app"
+            BuildableName = "Learning Module.app"
             BlueprintName = "LearningModule"
             ReferencedContainer = "container:LearningModule.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3896FF2D1A85A14400144A32"
-            BuildableName = "LearningModule.app"
+            BuildableName = "Learning Module.app"
             BlueprintName = "LearningModule"
             ReferencedContainer = "container:LearningModule.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3896FF2D1A85A14400144A32"
-            BuildableName = "LearningModule.app"
+            BuildableName = "Learning Module.app"
             BlueprintName = "LearningModule"
             ReferencedContainer = "container:LearningModule.xcodeproj">
          </BuildableReference>

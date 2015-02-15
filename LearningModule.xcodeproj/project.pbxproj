@@ -164,8 +164,9 @@
 		37F178211A86F97B005013A1 /* Module2Q3I.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F1781E1A86F97B005013A1 /* Module2Q3I.png */; };
 		37F178221A86F97B005013A1 /* Module2Q3C.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F1781F1A86F97B005013A1 /* Module2Q3C.png */; };
 		37F178231A86F97B005013A1 /* Module2Q3.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F178201A86F97B005013A1 /* Module2Q3.png */; };
+		380767BF1A9165E000644ACB /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380767BE1A9165E000644ACB /* opencv2.framework */; };
 		3896FF341A85A14400144A32 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3896FF331A85A14400144A32 /* main.m */; };
-		3896FF371A85A14400144A32 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3896FF361A85A14400144A32 /* AppDelegate.m */; };
+		3896FF371A85A14400144A32 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3896FF361A85A14400144A32 /* AppDelegate.mm */; };
 		3896FF3D1A85A14400144A32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3896FF3B1A85A14400144A32 /* Main.storyboard */; };
 		3896FF3F1A85A14400144A32 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3896FF3E1A85A14400144A32 /* Images.xcassets */; };
 		3896FF421A85A14400144A32 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3896FF401A85A14400144A32 /* LaunchScreen.xib */; };
@@ -351,11 +352,12 @@
 		37F1781E1A86F97B005013A1 /* Module2Q3I.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Module2Q3I.png; sourceTree = "<group>"; };
 		37F1781F1A86F97B005013A1 /* Module2Q3C.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Module2Q3C.png; sourceTree = "<group>"; };
 		37F178201A86F97B005013A1 /* Module2Q3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Module2Q3.png; sourceTree = "<group>"; };
+		380767BE1A9165E000644ACB /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		3896FF2E1A85A14400144A32 /* Learning Module.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Learning Module.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3896FF321A85A14400144A32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3896FF331A85A14400144A32 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3896FF351A85A14400144A32 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		3896FF361A85A14400144A32 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3896FF361A85A14400144A32 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		3896FF3C1A85A14400144A32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3896FF3E1A85A14400144A32 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3896FF411A85A14400144A32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				380767BF1A9165E000644ACB /* opencv2.framework in Frameworks */,
 				37A457CB1A871A79004C4634 /* AVFoundation.framework in Frameworks */,
 				37A457C41A87191B004C4634 /* MediaPlayer.framework in Frameworks */,
 			);
@@ -586,6 +589,7 @@
 		3896FF251A85A14400144A32 = {
 			isa = PBXGroup;
 			children = (
+				380767BE1A9165E000644ACB /* opencv2.framework */,
 				37A457CA1A871A79004C4634 /* AVFoundation.framework */,
 				37A457C31A87191B004C4634 /* MediaPlayer.framework */,
 				3896FF301A85A14400144A32 /* LearningModule */,
@@ -619,7 +623,7 @@
 				37A457881A87117A004C4634 /* Module3 */,
 				376311431A8AE3E40044063C /* Module4 */,
 				3896FF351A85A14400144A32 /* AppDelegate.h */,
-				3896FF361A85A14400144A32 /* AppDelegate.m */,
+				3896FF361A85A14400144A32 /* AppDelegate.mm */,
 				3896FF3B1A85A14400144A32 /* Main.storyboard */,
 				3746AC431A881C1800CA8838 /* Intro.h */,
 				3746AC441A881C1800CA8838 /* Intro.m */,
@@ -932,7 +936,7 @@
 				3746ACB91A88624B00CA8838 /* VideoQuiz.m in Sources */,
 				37F1780F1A86F0EC005013A1 /* Module2Quiz.m in Sources */,
 				37F0A0BC1A85D99600833582 /* Module1.m in Sources */,
-				3896FF371A85A14400144A32 /* AppDelegate.m in Sources */,
+				3896FF371A85A14400144A32 /* AppDelegate.mm in Sources */,
 				3896FF341A85A14400144A32 /* main.m in Sources */,
 				37F178021A86E8ED005013A1 /* Module2.m in Sources */,
 			);
@@ -1058,6 +1062,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = LearningModule/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Learning Module";
@@ -1068,6 +1076,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = LearningModule/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Learning Module";
