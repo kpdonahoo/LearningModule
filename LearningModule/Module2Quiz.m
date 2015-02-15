@@ -8,7 +8,8 @@
 
 #import "Module2Quiz.h"
 
-@interface Module2Quiz ()
+@interface Module2Quiz () <UIAlertViewDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UIButton *aButton;
 @property (weak, nonatomic) IBOutlet UIButton *bButton;
@@ -23,7 +24,7 @@
 
 NSArray *answers;
 NSArray *questions;
-NSArray *correct;
+NSArray *correctAnswers;
 NSArray *incorrect;
 int questions_index;
 @synthesize image;
@@ -34,27 +35,47 @@ int questions_index;
 @synthesize continueButton;
 @synthesize continueButton2;
 @synthesize toModule2;
+@synthesize backButton;
+UIAlertView *alert;
+NSMutableArray *timePerQuizPage2;
+NSNumber *sum2;
+NSTimer *transitionTimer;
+NSDate* startDate;
+NSMutableArray *answersToQuiz;
+
+- (NSNumber*)cancelTimer {
+    NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
+    NSNumber *currentTime = [NSNumber numberWithDouble:elapsedTime];
+    [transitionTimer invalidate];
+    return currentTime;
+}
+
+- (void)startTimer {
+    startDate = [NSDate date];
+    [self startTimerMethod];
+}
+
+- (void) startTimerMethod {
+    transitionTimer = [NSTimer scheduledTimerWithTimeInterval:3600.0 target:self selector:nil userInfo:nil repeats:NO];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     questions_index = 0;
     
-    /* aButton.layer.borderWidth=1.0f;
-     aButton.layer.borderColor=[[UIColor blackColor] CGColor];
-     bButton.layer.borderWidth=1.0f;
-     bButton.layer.borderColor=[[UIColor blackColor] CGColor];
-     cButton.layer.borderWidth=1.0f;
-     cButton.layer.borderColor=[[UIColor blackColor] CGColor];
-     dButton.layer.borderWidth=1.0f;
-     dButton.layer.borderColor=[[UIColor blackColor] CGColor];
-     */
+    timePerQuizPage2 = [[NSMutableArray alloc] init];
+    
+    answersToQuiz = [[NSMutableArray alloc] init];
+    
     answers = @[@"d",@"a",@"b"];
     questions = @[@"Module2Q1.png",@"Module2Q2.png",@"Module2Q3.png"];
     incorrect = @[@"Module2Q1I.png",@"Module2Q2I.png",@"Module2Q3I.png"];
-    correct = @[@"Module2Q1C.png",@"Module2Q2C.png",@"Module2Q3C.png"];
+    correctAnswers = @[@"Module2Q1C.png",@"Module2Q2C.png",@"Module2Q3C.png"];
     
     image.image = [UIImage imageNamed:[questions objectAtIndex:0]];
     [self performSelector:@selector(hideAD) withObject:nil afterDelay:.5];
+    
+     [self startTimer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,12 +101,17 @@ int questions_index;
 
 -(void) checkAnswer:(NSString *) answer {
     
+    NSNumber *currentTime = [self cancelTimer];
+    [timePerQuizPage2 addObject:currentTime];
+    [self startTimer];
+    
     aButton.hidden = YES;
     bButton.hidden = YES;
     cButton.hidden = YES;
     dButton.hidden = YES;
     
     if ([answer isEqualToString:[answers objectAtIndex:questions_index]]) {
+        [answersToQuiz addObject:@"correct"];
         [self performSelector:@selector(hideButtonTwo) withObject:nil afterDelay:.5];
         CATransition *animation = [CATransition animation];
         [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
@@ -94,9 +120,10 @@ int questions_index;
         [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
         [[self.image layer] addAnimation:animation forKey:nil];
         
-        image.image = [UIImage imageNamed:[correct objectAtIndex:questions_index]];
+        image.image = [UIImage imageNamed:[correctAnswers objectAtIndex:questions_index]];
         
     } else {
+        [answersToQuiz addObject:@"incorrect"];
         [self performSelector:@selector(hideButtonOne) withObject:nil afterDelay:.5];
         CATransition *animation = [CATransition animation];
         [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
@@ -112,6 +139,15 @@ int questions_index;
 }
 
 - (IBAction)continueButtonClicked:(id)sender {
+    
+    if (questions_index < 2) {
+        NSNumber *currentTime = [self cancelTimer];
+        [timePerQuizPage2 addObject:currentTime];
+        [self startTimer];
+    } else {
+        NSNumber *currentTime = [self cancelTimer];
+        [timePerQuizPage2 addObject:currentTime];
+    }
     
     if(questions_index <=1) {
         questions_index++;
@@ -164,6 +200,27 @@ int questions_index;
 }
 
 - (IBAction)toModule2:(id)sender {
+    alert = [[UIAlertView alloc] initWithTitle:@"Warning!" message:@"\nModule 3 contains graphic content."  delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:nil];
+    alert.tag = 1;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    /*SEND TO SERVER HERE*/
+    NSLog(@"SENDING TO SERVER:");
+    
+    for (int counter = 0; counter < 3; counter++) {
+        NSLog(@"Question %i: %@",counter+1,[answersToQuiz objectAtIndex:counter]);
+    }
+    
+    for (int i = 0; i < 6; i++) {
+        NSLog(@"Spent %@ seconds on %i.",[timePerQuizPage2 objectAtIndex:i],i+1);
+        NSNumber *currentTotal = [timePerQuizPage2 objectAtIndex:i];
+        sum2 = [NSNumber numberWithFloat:([sum2 floatValue] + [currentTotal floatValue])];
+    }
+    NSLog(@"Total time for Module 2 Quiz: %@",sum2);
+    
     [self performSegueWithIdentifier:@"toModule3" sender:self];
 }
 
@@ -205,6 +262,8 @@ int questions_index;
     animation.duration = 0.3;
     [toModule2.layer addAnimation:animation forKey:nil];
     toModule2.hidden = NO;
+    [backButton.layer addAnimation:animation forKey:nil];
+    backButton.hidden = NO;
 }
 -(void) hideAD {
     CATransition *animation = [CATransition animation];
@@ -217,16 +276,9 @@ int questions_index;
     dButton.hidden = NO;
 }
 
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (IBAction)backButton:(id)sender {
+    [self performSegueWithIdentifier:@"backToModule2" sender:self];
+}
 
 @end
 

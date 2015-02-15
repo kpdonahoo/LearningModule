@@ -23,9 +23,44 @@
 @synthesize pageLabel;
 NSArray *images;
 int image_index;
+int pageViews[11];
+NSMutableArray *timePerPage;
+NSTimeInterval total2;
+NSTimer *transitionTimer;
+NSDate* startDate;
+
+
+- (NSNumber*)cancelTimer {
+    NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
+    total2 +=elapsedTime;
+    NSNumber *currentTime = [NSNumber numberWithDouble:elapsedTime];
+    [transitionTimer invalidate];
+    return currentTime;
+}
+
+- (void)startTimer {
+    startDate = [NSDate date];
+    [self startTimerMethod];
+}
+
+- (void) startTimerMethod {
+    transitionTimer = [NSTimer scheduledTimerWithTimeInterval:3600.0 target:self selector:nil userInfo:nil repeats:NO];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSNumber *dummy = @0;
+    timePerPage = [[NSMutableArray alloc] init];
+    
+    for (int counter = 0; counter < 11; counter++) {
+        [timePerPage addObject:dummy];
+    }
+    
+    for (int counter = 0; counter < 11; counter++) {
+        pageViews[counter] = 0;
+    }
+    
     
     [image setUserInteractionEnabled:YES];
     
@@ -34,23 +69,55 @@ int image_index;
     image_index = 0;
     
       images = @[@"Module2-1 copy.png",@"Module2-2 copy.png",@"Module2-3 copy.png",@"Module2-4 copy.png",@"Module2-5 copy.png",@"Module2-6 copy.png",@"Module2-7 copy.png"];
-    
-    
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    
-    // Setting the swipe direction.
-    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
-    
-    // Adding the swipe gesture on image view
-    [image addGestureRecognizer:swipeLeft];
-    [image addGestureRecognizer:swipeRight];
 }
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
     
     continueToQuizButton.hidden = YES;
+    
+    if([pageLabel.text isEqualToString:@"1"]) {
+        pageViews[0] = pageViews[0] + 1;
+        NSNumber *currentTime = [self cancelTimer];
+        NSNumber *oldTime = [timePerPage objectAtIndex:0];
+        NSNumber *newTime = [NSNumber numberWithFloat:([currentTime floatValue] + [oldTime floatValue])];
+        [timePerPage insertObject:newTime atIndex:0];
+        [self startTimer];
+    } else if([pageLabel.text isEqualToString:@"2"]) {
+        pageViews[1] = pageViews[1] + 1;
+        NSNumber *currentTime = [self cancelTimer];
+        NSNumber *oldTime = [timePerPage objectAtIndex:1];
+        NSNumber *newTime = [NSNumber numberWithFloat:([currentTime floatValue] + [oldTime floatValue])];
+        [timePerPage insertObject:newTime atIndex:1];
+        [self startTimer];
+    } if([pageLabel.text isEqualToString:@"3"]) {
+        pageViews[2] = pageViews[2] + 1;
+        NSNumber *currentTime = [self cancelTimer];
+        NSNumber *oldTime = [timePerPage objectAtIndex:2];
+        NSNumber *newTime = [NSNumber numberWithFloat:([currentTime floatValue] + [oldTime floatValue])];
+        [timePerPage insertObject:newTime atIndex:2];
+        [self startTimer];
+    } if([pageLabel.text isEqualToString:@"4"]) {
+        pageViews[3] = pageViews[3] + 1;
+        NSNumber *currentTime = [self cancelTimer];
+        NSNumber *oldTime = [timePerPage objectAtIndex:3];
+        NSNumber *newTime = [NSNumber numberWithFloat:([currentTime floatValue] + [oldTime floatValue])];
+        [timePerPage insertObject:newTime atIndex:3];
+        [self startTimer];
+    } if([pageLabel.text isEqualToString:@"5"]) {
+        pageViews[4] = pageViews[4] + 1;
+        NSNumber *currentTime = [self cancelTimer];
+        NSNumber *oldTime = [timePerPage objectAtIndex:4];
+        NSNumber *newTime = [NSNumber numberWithFloat:([currentTime floatValue] + [oldTime floatValue])];
+        [timePerPage insertObject:newTime atIndex:4];
+        [self startTimer];
+    } if([pageLabel.text isEqualToString:@"6"]) {
+        pageViews[5] = pageViews[5] + 1;
+        NSNumber *currentTime = [self cancelTimer];
+        NSNumber *oldTime = [timePerPage objectAtIndex:5];
+        NSNumber *newTime = [NSNumber numberWithFloat:([currentTime floatValue] + [oldTime floatValue])];
+        [timePerPage insertObject:newTime atIndex:5];
+        [self startTimer];
+    }
     
     if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
         
@@ -99,12 +166,39 @@ int image_index;
 }
 
 - (IBAction)beginModule:(id)sender {
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    
+    // Setting the swipe direction.
+    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    
+    // Adding the swipe gesture on image view
+    [image addGestureRecognizer:swipeLeft];
+    [image addGestureRecognizer:swipeRight];
+    
     image.image = [UIImage imageNamed:[images objectAtIndex:image_index]];
     beginModuleButton.hidden = YES;
     pageLabel.text = [NSString stringWithFormat:@"%i",image_index+1];
+    [self startTimer];
 }
 
 - (IBAction)continueToQuiz:(id)sender {
+    pageViews[6] = pageViews[6] + 1;
+    NSNumber *currentTime = [self cancelTimer];
+    NSNumber *oldTime = [timePerPage objectAtIndex:6];
+    NSNumber *newTime = [NSNumber numberWithFloat:([currentTime floatValue] + [oldTime floatValue])];
+    [timePerPage insertObject:newTime atIndex:6];
+    
+    
+    /*SEND TO SERVER HERE*/
+    NSLog(@"SENDING TO SERVER:");
+    for (int i = 0; i < 7; i++) {
+        NSLog(@"Visited page %i %i times and spent %@ seconds  there.",i+1,pageViews[i],[timePerPage objectAtIndex:i]);
+    }
+    
+    NSLog(@"Total time for Module 2: %f",total2);
+
     [self performSegueWithIdentifier: @"toQuiz2" sender: self];
 }
 

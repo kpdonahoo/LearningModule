@@ -17,13 +17,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 @property (weak, nonatomic) IBOutlet UIButton *toModule2;
 @property (weak, nonatomic) IBOutlet UIButton *continueButton2;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
 @end
 
 @implementation Module3Quiz
 
 NSArray *answers;
 NSArray *questions;
-NSArray *correct;
+NSArray *correctAnswers;
 NSArray *incorrect;
 int questions_index;
 @synthesize image;
@@ -34,24 +35,42 @@ int questions_index;
 @synthesize continueButton;
 @synthesize continueButton2;
 @synthesize toModule2;
+@synthesize backButton;
+NSMutableArray *timePerQuizPage3;
+NSNumber *sum3;
+NSTimer *transitionTimer;
+NSDate* startDate;
+NSMutableArray *answersToQuiz;
+
+- (NSNumber*)cancelTimer {
+    NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
+    NSNumber *currentTime = [NSNumber numberWithDouble:elapsedTime];
+    [transitionTimer invalidate];
+    return currentTime;
+}
+
+- (void)startTimer {
+    startDate = [NSDate date];
+    [self startTimerMethod];
+}
+
+- (void) startTimerMethod {
+    transitionTimer = [NSTimer scheduledTimerWithTimeInterval:3600.0 target:self selector:nil userInfo:nil repeats:NO];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     questions_index = 0;
     
-    /* aButton.layer.borderWidth=1.0f;
-     aButton.layer.borderColor=[[UIColor blackColor] CGColor];
-     bButton.layer.borderWidth=1.0f;
-     bButton.layer.borderColor=[[UIColor blackColor] CGColor];
-     cButton.layer.borderWidth=1.0f;
-     cButton.layer.borderColor=[[UIColor blackColor] CGColor];
-     dButton.layer.borderWidth=1.0f;
-     dButton.layer.borderColor=[[UIColor blackColor] CGColor];
-     */
+    timePerQuizPage3 = [[NSMutableArray alloc] init];
+    
+    answersToQuiz = [[NSMutableArray alloc] init];
+
     answers = @[@"b",@"b",@"a"];
     questions = @[@"Module3Q1.png",@"Module3Q2.png",@"Module3Q3.png"];
     incorrect = @[@"Module3Q1I.png",@"Module3Q2I.png",@"Module3Q3I.png"];
-    correct = @[@"Module3Q1C.png",@"Module3Q2C.png",@"Module3Q3C.png"];
+    correctAnswers = @[@"Module3Q1C.png",@"Module3Q2C.png",@"Module3Q3C.png"];
     
     image.image = [UIImage imageNamed:[questions objectAtIndex:0]];
     [self performSelector:@selector(hideAD) withObject:nil afterDelay:.5];
@@ -80,12 +99,17 @@ int questions_index;
 
 -(void) checkAnswer:(NSString *) answer {
     
+    NSNumber *currentTime = [self cancelTimer];
+    [timePerQuizPage3 addObject:currentTime];
+    [self startTimer];
+    
     aButton.hidden = YES;
     bButton.hidden = YES;
     cButton.hidden = YES;
     dButton.hidden = YES;
     
     if ([answer isEqualToString:[answers objectAtIndex:questions_index]]) {
+        [answersToQuiz addObject:@"correct"];
         [self performSelector:@selector(hideButtonTwo) withObject:nil afterDelay:.5];
         CATransition *animation = [CATransition animation];
         [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
@@ -94,10 +118,11 @@ int questions_index;
         [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
         [[self.image layer] addAnimation:animation forKey:nil];
         
-        image.image = [UIImage imageNamed:[correct objectAtIndex:questions_index]];
+        image.image = [UIImage imageNamed:[correctAnswers objectAtIndex:questions_index]];
         
     } else {
         [self performSelector:@selector(hideButtonOne) withObject:nil afterDelay:.5];
+        [answersToQuiz addObject:@"incorrect"];
         CATransition *animation = [CATransition animation];
         [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
         [animation setType:kCATransitionPush]; //New image will push the old image off
@@ -112,6 +137,15 @@ int questions_index;
 }
 
 - (IBAction)continueButtonClicked:(id)sender {
+    
+    if (questions_index < 2) {
+        NSNumber *currentTime = [self cancelTimer];
+        [timePerQuizPage3 addObject:currentTime];
+        [self startTimer];
+    } else {
+        NSNumber *currentTime = [self cancelTimer];
+        [timePerQuizPage3 addObject:currentTime];
+    }
     
     if(questions_index <=1) {
         questions_index++;
@@ -164,6 +198,21 @@ int questions_index;
 }
 
 - (IBAction)toModule2:(id)sender {
+    
+    /*SEND TO SERVER HERE*/
+    NSLog(@"SENDING TO SERVER:");
+    
+    for (int counter = 0; counter < 3; counter++) {
+        NSLog(@"Question %i: %@",counter+1,[answersToQuiz objectAtIndex:counter]);
+    }
+    
+    for (int i = 0; i < 6; i++) {
+        NSLog(@"Spent %@ seconds on %i.",[timePerQuizPage3 objectAtIndex:i],i+1);
+        NSNumber *currentTotal = [timePerQuizPage3 objectAtIndex:i];
+        sum3 = [NSNumber numberWithFloat:([sum3 floatValue] + [currentTotal floatValue])];
+    }
+    NSLog(@"Total time for Module 3 Quiz: %@",sum3);
+    
     [self performSegueWithIdentifier:@"toModule4" sender:self];
 }
 
@@ -204,7 +253,9 @@ int questions_index;
     animation.type = kCATransitionFade;
     animation.duration = 0.3;
     [toModule2.layer addAnimation:animation forKey:nil];
+    [backButton.layer addAnimation:animation forKey:nil];
     toModule2.hidden = NO;
+    backButton.hidden = NO;
 }
 -(void) hideAD {
     CATransition *animation = [CATransition animation];
@@ -217,6 +268,9 @@ int questions_index;
     dButton.hidden = NO;
 }
 
+- (IBAction)backButton:(id)sender {
+    [self performSegueWithIdentifier:@"backToModule3" sender:self];
+}
 
 /*
  #pragma mark - Navigation

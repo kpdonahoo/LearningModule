@@ -8,7 +8,7 @@
 
 #import "Module1Quiz.h"
 
-@interface Module1Quiz ()
+@interface Module1Quiz () <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UIButton *aButton;
 @property (weak, nonatomic) IBOutlet UIButton *bButton;
@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 @property (weak, nonatomic) IBOutlet UIButton *toModule2;
 @property (weak, nonatomic) IBOutlet UIButton *continueButton2;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
 
 
 @end
@@ -24,7 +25,7 @@
 @implementation Module1Quiz
 NSArray *answers;
 NSArray *questions;
-NSArray *correct;
+NSArray *correct_answers;
 NSArray *incorrect;
 int questions_index;
 @synthesize image;
@@ -35,27 +36,47 @@ int questions_index;
 @synthesize continueButton;
 @synthesize continueButton2;
 @synthesize toModule2;
+UIAlertView *alert;
+@synthesize backButton;
+NSMutableArray *timePerQuizPage;
+NSNumber *sum;
+NSTimer *transitionTimer;
+NSDate* startDate;
+NSMutableArray *answersToQuiz;
+
+- (NSNumber*)cancelTimer {
+    NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
+    NSNumber *currentTime = [NSNumber numberWithDouble:elapsedTime];
+    [transitionTimer invalidate];
+    return currentTime;
+}
+
+- (void)startTimer {
+    startDate = [NSDate date];
+    [self startTimerMethod];
+}
+
+- (void) startTimerMethod {
+    transitionTimer = [NSTimer scheduledTimerWithTimeInterval:3600.0 target:self selector:nil userInfo:nil repeats:NO];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     questions_index = 0;
     
-   /* aButton.layer.borderWidth=1.0f;
-    aButton.layer.borderColor=[[UIColor blackColor] CGColor];
-    bButton.layer.borderWidth=1.0f;
-    bButton.layer.borderColor=[[UIColor blackColor] CGColor];
-    cButton.layer.borderWidth=1.0f;
-    cButton.layer.borderColor=[[UIColor blackColor] CGColor];
-    dButton.layer.borderWidth=1.0f;
-    dButton.layer.borderColor=[[UIColor blackColor] CGColor];
-    */
+    timePerQuizPage = [[NSMutableArray alloc] init];
+    
+    answersToQuiz = [[NSMutableArray alloc] init];
+    
     answers = @[@"b",@"a",@"a"];
     questions = @[@"Module1Q1.png",@"Module1Q2.png",@"Module1Q3.png"];
     incorrect = @[@"Module1Q1I.png",@"Module1Q2I.png",@"Module1Q3I.png"];
-    correct = @[@"Module1Q1C.png",@"Module1Q2C.png",@"Module1Q3C.png"];
+    correct_answers = @[@"Module1Q1C.png",@"Module1Q2C.png",@"Module1Q3C.png"];
     
     image.image = [UIImage imageNamed:[questions objectAtIndex:0]];
     [self performSelector:@selector(hideAD) withObject:nil afterDelay:.5];
+    
+    [self startTimer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,6 +101,10 @@ int questions_index;
 }
 
 -(void) checkAnswer:(NSString *) answer {
+    
+    NSNumber *currentTime = [self cancelTimer];
+    [timePerQuizPage addObject:currentTime];
+    [self startTimer];
 
     aButton.hidden = YES;
     bButton.hidden = YES;
@@ -87,6 +112,7 @@ int questions_index;
     dButton.hidden = YES;
     
     if ([answer isEqualToString:[answers objectAtIndex:questions_index]]) {
+        [answersToQuiz addObject:@"correct"];
         [self performSelector:@selector(hideButtonTwo) withObject:nil afterDelay:.5];
         CATransition *animation = [CATransition animation];
         [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
@@ -95,9 +121,10 @@ int questions_index;
         [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
         [[self.image layer] addAnimation:animation forKey:nil];
         
-        image.image = [UIImage imageNamed:[correct objectAtIndex:questions_index]];
+        image.image = [UIImage imageNamed:[correct_answers objectAtIndex:questions_index]];
         
     } else {
+        [answersToQuiz addObject:@"incorrect"];
         [self performSelector:@selector(hideButtonOne) withObject:nil afterDelay:.5];
         CATransition *animation = [CATransition animation];
         [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
@@ -113,6 +140,15 @@ int questions_index;
 }
 
 - (IBAction)continueButtonClicked:(id)sender {
+    
+    if (questions_index < 2) {
+        NSNumber *currentTime = [self cancelTimer];
+        [timePerQuizPage addObject:currentTime];
+        [self startTimer];
+    } else {
+        NSNumber *currentTime = [self cancelTimer];
+        [timePerQuizPage addObject:currentTime];
+    }
     
     if(questions_index <=1) {
     questions_index++;
@@ -153,10 +189,36 @@ int questions_index;
         continueButton.hidden = YES;
     }
 }
+- (IBAction)toModule1:(id)sender {
+    [self performSegueWithIdentifier:@"toModule1" sender:self];
+}
 
 - (IBAction)toModule2:(id)sender {
-    [self performSegueWithIdentifier:@"toModule2" sender:self];
+    alert = [[UIAlertView alloc] initWithTitle:@"Warning!" message:@"\nModule 2 contains graphic content."  delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:nil];
+    alert.tag = 1;
+    [alert show];
 }
+
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    /*SEND TO SERVER HERE*/
+    NSLog(@"SENDING TO SERVER:");
+    
+    for (int counter = 0; counter < 3; counter++) {
+        NSLog(@"Question %i: %@",counter+1,[answersToQuiz objectAtIndex:counter]);
+    }
+    
+    for (int i = 0; i < 6; i++) {
+        NSLog(@"Spent %@ seconds on %i.",[timePerQuizPage objectAtIndex:i],i+1);
+        NSNumber *currentTotal = [timePerQuizPage objectAtIndex:i];
+        sum = [NSNumber numberWithFloat:([sum floatValue] + [currentTotal floatValue])];
+    }
+    NSLog(@"Total time for Module 1 Quiz: %@",sum);
+    
+    [self performSegueWithIdentifier:@"toModule2" sender:self];
+    
+}
+
 
 -(void) hideButtonOne {
     CATransition *animation = [CATransition animation];
@@ -195,7 +257,9 @@ int questions_index;
     animation.type = kCATransitionFade;
     animation.duration = 0.3;
     [toModule2.layer addAnimation:animation forKey:nil];
+    [backButton.layer addAnimation:animation forKey:nil];
     toModule2.hidden = NO;
+    backButton.hidden = NO;
 }
 -(void) hideAD {
     CATransition *animation = [CATransition animation];
