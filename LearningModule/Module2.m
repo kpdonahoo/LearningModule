@@ -68,7 +68,7 @@ NSDate* startDate;
     pageLabel.font = font;
     image_index = 0;
     
-      images = @[@"Module2-1 copy.png",@"Module2-2 copy.png",@"Module2-3 copy.png",@"Module2-4 copy.png",@"Module2-5 copy.png",@"Module2-6 copy.png",@"Module2-7 copy.png"];
+    images = @[@"Module2-1 copy.png",@"Module2-2 copy.png",@"Module2-3 copy.png",@"Module2-4 copy.png",@"Module2-5 copy.png",@"Module2-6 copy.png",@"Module2-7 copy.png"];
 }
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
@@ -198,7 +198,7 @@ NSDate* startDate;
     }
     
     NSLog(@"Total time for Module 2: %f",total2);
-
+    
     [self performSegueWithIdentifier: @"toQuiz2" sender: self];
 }
 

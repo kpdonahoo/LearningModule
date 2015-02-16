@@ -7,16 +7,30 @@
 //
 
 #import "Module1.h"
+#ifdef __cplusplus
+#import <opencv2/videoio/cap_ios.h>
+#import <opencv2/opencv.hpp>
+#import <opencv2/imgproc/imgproc.hpp>
+#import <opencv2/highgui/highgui_c.h>
+#import <opencv2/core/core.hpp>
+#endif
 
-@interface Module1 ()
+#import "AppDelegate.h"
+
+using namespace cv;
+
+@interface Module1 () <CvVideoCameraDelegate>
+@property (strong, nonatomic) CvVideoCamera* videoCamera;
 @property (weak, nonatomic) IBOutlet UIButton *beginModuleButton;
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UIButton *continueToQuizButton;
 @property (weak, nonatomic) IBOutlet UILabel *pageLabel;
+@property (strong, nonatomic) UIView *cameraOutput;
 
 @end
 
 @implementation Module1
+@synthesize cameraOutput;
 @synthesize image;
 @synthesize beginModuleButton;
 @synthesize continueToQuizButton;
@@ -29,6 +43,10 @@ NSTimeInterval totalMod1;
 NSTimer *transitionTimer;
 NSDate* startDate;
 
+Mat imageFrames[180];
+int frameCount = 0;
+int frameNumber = 0;
+NSString *frame;
 
 - (NSNumber*)cancelTimer {
     NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
@@ -51,9 +69,12 @@ NSDate* startDate;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.videoCamera start];
+    
     [image setUserInteractionEnabled:YES];
     NSNumber *dummy = @0;
     timePerPage = [[NSMutableArray alloc] init];
+    cameraOutput = [[UIView alloc] init];
     
     for (int counter = 0; counter < 11; counter++) {
         [timePerPage addObject:dummy];
@@ -65,6 +86,49 @@ NSDate* startDate;
     
     images = @[@"Module1-1 copy.png",@"Module1-2 copy.png",@"Module1-3 copy.png",@"Module1-4 copy.png",@"Module1-5 copy.png",@"Module1-6 copy.png",@"Module1-7 copy.png",@"Module1-8 copy.png",@"Module1-9 copy.png",@"Module1-10 copy.png",@"Module1-11 copy.png",];
 }
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [self.videoCamera stop];
+}
+
+#ifdef __cplusplus
+-(CvVideoCamera *)videoCamera{
+    if(!_videoCamera) {
+        _videoCamera = [[CvVideoCamera alloc] initWithParentView:self.cameraOutput];
+        _videoCamera.delegate = self;
+        _videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
+        _videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset640x480;
+        _videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+        _videoCamera.defaultFPS = 24;
+        _videoCamera.grayscaleMode = NO;
+        
+    }
+    
+    return _videoCamera;
+    
+}
+
+-(void)processImage:(Mat&)image; {
+    NSLog(@"%d", frameCount);
+    Mat grayFrame, output;
+    imageFrames[frameCount] = image;
+    frameCount++;
+    
+    if(frameCount == 180) {
+        
+        frameCount = 0;
+        frame = [NSString stringWithFormat:@"%d", frameNumber];
+        frameNumber = frameNumber + 1;
+        NSLog(@"call AD");
+         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate sendFramesAndWriteToFile:imageFrames];
+        
+        
+    }
+  
+}
+
+#endif
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
         continueToQuizButton.hidden = YES;

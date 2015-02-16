@@ -7,13 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#ifdef __cplusplus
-#import <opencv2/videoio/cap_ios.h>
-#import <opencv2/opencv.hpp>
-#import <opencv2/imgproc/imgproc.hpp>
-#import <opencv2/highgui/highgui_c.h>
-#import <opencv2/core/core.hpp>
-#endif
 
 using namespace cv;
 
@@ -22,7 +15,7 @@ using namespace cv;
 @end
 
 @implementation AppDelegate
-Mat recievedFrames[180];
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -35,9 +28,60 @@ Mat recievedFrames[180];
     return YES;
 }
 
-- (void)sendFramesAndWriteToFile:(Mat&) matBuffer{
+-(UIImage *)imageWithCVMat:(const Mat&)cvMat {
+    
+    NSData *data = [NSData dataWithBytes:cvMat.data length:cvMat.elemSize() * cvMat.total()];
+    
+    CGColorSpaceRef colorSpace;
+    
+    if(cvMat.elemSize() == 1) {
+        colorSpace = CGColorSpaceCreateDeviceGray();
+    } else {
+        colorSpace = CGColorSpaceCreateDeviceRGB();
+    }
+    
+    CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
+    
+    CGImageRef imageRef = CGImageCreate(cvMat.cols,
+                                        cvMat.rows,
+                                        8,
+                                        8 * cvMat.elemSize(),
+                                        cvMat.step[0],
+                                        colorSpace,
+                                        kCGImageAlphaNone | kCGBitmapByteOrderDefault,
+                                        provider,
+                                        NULL,
+                                        false,
+                                        kCGRenderingIntentDefault);
+    
+    UIImage *image = [[UIImage alloc] initWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    CGDataProviderRelease(provider);
+    CGColorSpaceRelease(colorSpace);
+    
+    return image;
     
 }
+
+- (void)sendFramesAndWriteToFile:(Mat*)matBuffer{
+    NSLog(@"Started sending frames");
+    NSString *text;
+    for(int i = 0; i < 180; i++) {
+        UIImage *uImage = [self imageWithCVMat:matBuffer[i]];
+        NSData *dataObj = UIImageJPEGRepresentation(uImage, 1.0);
+        //int bytes = [dataObj length];
+        NSString *byteArray = [dataObj base64Encoding];
+        NSString *thisTemp = [NSString stringWithFormat:@"image%d", i];
+        text = [NSString stringWithFormat:@"%s%s", thisTemp, byteArray];
+    }
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *appFile = [documentsDirectory stringByAppendingPathComponent:@"MyFile"];
+//    [text writeToFile:appFile atomically:YES];
+    NSLog(@"%@", documentsDirectory);
+    
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

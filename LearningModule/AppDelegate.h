@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#ifdef __cplusplus
+#import <opencv2/videoio/cap_ios.h>
+#import <opencv2/opencv.hpp>
+#import <opencv2/imgproc/imgproc.hpp>
+#import <opencv2/highgui/highgui_c.h>
+#import <opencv2/core/core.hpp>
+using namespace cv;
+#endif
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-
+#ifdef __cplusplus
+- (void)sendFramesAndWriteToFile:(Mat*)matBuffer;
+#endif
 @end
 
