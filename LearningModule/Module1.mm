@@ -114,7 +114,7 @@ NSString *frame;
     imageFrames[frameCount] = image;
     frameCount++;
     
-    if(frameCount == 180) {
+    if(frameCount == 48) {
         
         frameCount = 0;
         frame = [NSString stringWithFormat:@"%d", frameNumber];

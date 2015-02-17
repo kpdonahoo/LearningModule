@@ -65,19 +65,20 @@ using namespace cv;
 
 - (void)sendFramesAndWriteToFile:(Mat*)matBuffer{
     NSLog(@"Started sending frames");
-    NSString *text;
-    for(int i = 0; i < 180; i++) {
+    NSString *text = [NSString stringWithFormat:@""];
+    for(int i = 0; i < 48; i++) {
         UIImage *uImage = [self imageWithCVMat:matBuffer[i]];
         NSData *dataObj = UIImageJPEGRepresentation(uImage, 1.0);
         //int bytes = [dataObj length];
         NSString *byteArray = [dataObj base64Encoding];
         NSString *thisTemp = [NSString stringWithFormat:@"image%d", i];
-        text = [NSString stringWithFormat:@"%s%s", thisTemp, byteArray];
+        text = [NSString stringWithFormat:@"%@%@%@", text, thisTemp, byteArray];
+        //NSLog(text);
     }
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *appFile = [documentsDirectory stringByAppendingPathComponent:@"MyFile"];
-//    [text writeToFile:appFile atomically:YES];
+    [text writeToFile:appFile atomically:YES];
     NSLog(@"%@", documentsDirectory);
     
 }
