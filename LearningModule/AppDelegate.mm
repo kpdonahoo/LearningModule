@@ -16,8 +16,13 @@ using namespace cv;
 
 @implementation AppDelegate
 
+dispatch_queue_t backgroundQueue;
+int numberOfFrames = 0;
+int fileNumber = 0;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    backgroundQueue = dispatch_queue_create("com.mycompany.myqueue", DISPATCH_QUEUE_SERIAL);
     
     UITextField *lagFreeField = [[UITextField alloc] init];
     [self.window addSubview:lagFreeField];
@@ -63,26 +68,48 @@ using namespace cv;
     
 }
 
-- (void)sendFramesAndWriteToFile:(Mat*)matBuffer{
+- (void)sendFramesAndWriteToFile:(Mat*)matBuffer:(int)matBufferLength:(string)module:(string)page{
     NSLog(@"Started sending frames");
+    fileNumber = fileNumber + 1;
     NSString *text = [NSString stringWithFormat:@""];
-    for(int i = 0; i < 48; i++) {
+    NSString *fileName = [NSString stringWithFormat:@"%s-%d", module.c_str(), fileNumber];
+    for(int i = 0; i < matBufferLength; i++) {
         UIImage *uImage = [self imageWithCVMat:matBuffer[i]];
         NSData *dataObj = UIImageJPEGRepresentation(uImage, 1.0);
         //int bytes = [dataObj length];
         NSString *byteArray = [dataObj base64Encoding];
-        NSString *thisTemp = [NSString stringWithFormat:@"image%d", i];
+        NSString *thisTemp = [NSString stringWithFormat:@"image%d", numberOfFrames++];
         text = [NSString stringWithFormat:@"%@%@%@", text, thisTemp, byteArray];
         //NSLog(text);
     }
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *appFile = [documentsDirectory stringByAppendingPathComponent:@"MyFile"];
-    [text writeToFile:appFile atomically:YES];
+    NSString *appFile = [documentsDirectory stringByAppendingPathComponent:fileName];
+    dispatch_async(backgroundQueue, ^{
+        [text writeToFile:appFile atomically:YES];
+    });
+
     NSLog(@"%@", documentsDirectory);
     
 }
 
+- (void)changeModuleAndHandleTimers:(NSMutableArray*)array1:(NSMutableArray*)array2:(NSString*)moduleNumber {
+    NSString *textToSend = [NSString stringWithFormat:@""];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *appFile = [documentsDirectory stringByAppendingPathComponent:moduleNumber];
+    for(int i = 0; i < [array1 count]; i++) {
+        textToSend = [NSString stringWithFormat:@"%@%@", textToSend, [array1 objectAtIndex:i]];
+    }
+    
+    if(array2 != nullptr) {
+        for(int j = 0; j < [array2 count]; j++) {
+            textToSend = [NSString stringWithFormat:@"%@%@", textToSend, [array2 objectAtIndex:j]];
+        }
+    }
+    
+    [textToSend writeToFile:appFile atomically:YES];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

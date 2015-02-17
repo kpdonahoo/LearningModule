@@ -42,8 +42,9 @@ NSMutableArray *timePerPage;
 NSTimeInterval totalMod1;
 NSTimer *transitionTimer;
 NSDate* startDate;
+AppDelegate *appDelegate;
 
-Mat imageFrames[180];
+Mat imageFrames[48];
 int frameCount = 0;
 int frameNumber = 0;
 NSString *frame;
@@ -70,7 +71,7 @@ NSString *frame;
     [super viewDidLoad];
     
     [self.videoCamera start];
-    
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [image setUserInteractionEnabled:YES];
     NSNumber *dummy = @0;
     timePerPage = [[NSMutableArray alloc] init];
@@ -99,7 +100,7 @@ NSString *frame;
         _videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
         _videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset640x480;
         _videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationLandscapeLeft;
-        _videoCamera.defaultFPS = 24;
+        _videoCamera.defaultFPS =10;
         _videoCamera.grayscaleMode = NO;
         
     }
@@ -109,21 +110,15 @@ NSString *frame;
 }
 
 -(void)processImage:(Mat&)image; {
-    NSLog(@"%d", frameCount);
     Mat grayFrame, output;
     imageFrames[frameCount] = image;
     frameCount++;
     
     if(frameCount == 48) {
-        
-        frameCount = 0;
         frame = [NSString stringWithFormat:@"%d", frameNumber];
         frameNumber = frameNumber + 1;
-        NSLog(@"call AD");
-         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        [appDelegate sendFramesAndWriteToFile:imageFrames];
-        
-        
+        [appDelegate sendFramesAndWriteToFile:imageFrames:frameCount:"M1":pageLabel.text.UTF8String];
+        frameCount = 0;
     }
   
 }
@@ -282,8 +277,8 @@ NSString *frame;
         NSLog(@"Visited page %i %i times and spent %@ seconds  there.",i+1,pageViews[i],[timePerPage objectAtIndex:i]);
     }
     NSLog(@"Total time for Module 1: %f",totalMod1);
-    
-    
+    [appDelegate changeModuleAndHandleTimers:timePerPage:nullptr:@"M1"];
+    [appDelegate sendFramesAndWriteToFile:imageFrames:frameCount:"M1":pageLabel.text.UTF8String];
     [self performSegueWithIdentifier: @"toQuiz" sender: self];
 }
 
