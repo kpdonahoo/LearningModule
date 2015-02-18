@@ -21,44 +21,44 @@
 @synthesize beginModuleButton;
 @synthesize continueToQuizButton;
 @synthesize pageLabel;
-NSArray *images;
-int image_index;
-int pageViews[11];
-NSMutableArray *timePerPage;
-NSTimeInterval total2;
-NSTimer *transitionTimer;
-NSDate* startDate;
+NSArray *images_m2;
+int imageIndex_m2;
+int pageViews_m2[11];
+NSMutableArray *timePerPage_m2;
+NSTimeInterval total_m2;
+NSTimer *transitionTimer_m2;
+NSDate* startDate_m2;
 
 
 - (NSNumber*)cancelTimer {
-    NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
-    total2 +=elapsedTime;
+    NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate_m2];
+    total_m2 +=elapsedTime;
     NSNumber *currentTime = [NSNumber numberWithDouble:elapsedTime];
-    [transitionTimer invalidate];
+    [transitionTimer_m2 invalidate];
     return currentTime;
 }
 
 - (void)startTimer {
-    startDate = [NSDate date];
+    startDate_m2 = [NSDate date];
     [self startTimerMethod];
 }
 
 - (void) startTimerMethod {
-    transitionTimer = [NSTimer scheduledTimerWithTimeInterval:3600.0 target:self selector:nil userInfo:nil repeats:NO];
+    transitionTimer_m2 = [NSTimer scheduledTimerWithTimeInterval:3600.0 target:self selector:nil userInfo:nil repeats:NO];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     NSNumber *dummy = @0;
-    timePerPage = [[NSMutableArray alloc] init];
+    timePerPage_m2 = [[NSMutableArray alloc] init];
     
     for (int counter = 0; counter < 11; counter++) {
-        [timePerPage addObject:dummy];
+        [timePerPage_m2 addObject:dummy];
     }
     
     for (int counter = 0; counter < 11; counter++) {
-        pageViews[counter] = 0;
+        pageViews_m2[counter] = 0;
     }
     
     
@@ -66,9 +66,9 @@ NSDate* startDate;
     
     UIFont *font = [UIFont fontWithName:@"PTSans-Regular" size:18];
     pageLabel.font = font;
-    image_index = 0;
+    imageIndex_m2 = 0;
     
-    images = @[@"Module2-1 copy.png",@"Module2-2 copy.png",@"Module2-3 copy.png",@"Module2-4 copy.png",@"Module2-5 copy.png",@"Module2-6 copy.png",@"Module2-7 copy.png"];
+    images_m2 = @[@"Module2-1 copy.png",@"Module2-2 copy.png",@"Module2-3 copy.png",@"Module2-4 copy.png",@"Module2-5 copy.png",@"Module2-6 copy.png",@"Module2-7 copy.png"];
 }
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
@@ -76,46 +76,46 @@ NSDate* startDate;
     continueToQuizButton.hidden = YES;
     
     if([pageLabel.text isEqualToString:@"1"]) {
-        pageViews[0] = pageViews[0] + 1;
+        pageViews_m2[0] = pageViews_m2[0] + 1;
         NSNumber *currentTime = [self cancelTimer];
-        NSNumber *oldTime = [timePerPage objectAtIndex:0];
+        NSNumber *oldTime = [timePerPage_m2 objectAtIndex:0];
         NSNumber *newTime = [NSNumber numberWithFloat:([currentTime floatValue] + [oldTime floatValue])];
-        [timePerPage insertObject:newTime atIndex:0];
+        [timePerPage_m2 insertObject:newTime atIndex:0];
         [self startTimer];
     } else if([pageLabel.text isEqualToString:@"2"]) {
-        pageViews[1] = pageViews[1] + 1;
+        pageViews_m2[1] = pageViews_m2[1] + 1;
         NSNumber *currentTime = [self cancelTimer];
-        NSNumber *oldTime = [timePerPage objectAtIndex:1];
+        NSNumber *oldTime = [timePerPage_m2 objectAtIndex:1];
         NSNumber *newTime = [NSNumber numberWithFloat:([currentTime floatValue] + [oldTime floatValue])];
-        [timePerPage insertObject:newTime atIndex:1];
+        [timePerPage_m2 insertObject:newTime atIndex:1];
         [self startTimer];
     } if([pageLabel.text isEqualToString:@"3"]) {
-        pageViews[2] = pageViews[2] + 1;
+        pageViews_m2[2] = pageViews_m2[2] + 1;
         NSNumber *currentTime = [self cancelTimer];
-        NSNumber *oldTime = [timePerPage objectAtIndex:2];
+        NSNumber *oldTime = [timePerPage_m2 objectAtIndex:2];
         NSNumber *newTime = [NSNumber numberWithFloat:([currentTime floatValue] + [oldTime floatValue])];
-        [timePerPage insertObject:newTime atIndex:2];
+        [timePerPage_m2 insertObject:newTime atIndex:2];
         [self startTimer];
     } if([pageLabel.text isEqualToString:@"4"]) {
-        pageViews[3] = pageViews[3] + 1;
+        pageViews_m2[3] = pageViews_m2[3] + 1;
         NSNumber *currentTime = [self cancelTimer];
-        NSNumber *oldTime = [timePerPage objectAtIndex:3];
+        NSNumber *oldTime = [timePerPage_m2 objectAtIndex:3];
         NSNumber *newTime = [NSNumber numberWithFloat:([currentTime floatValue] + [oldTime floatValue])];
-        [timePerPage insertObject:newTime atIndex:3];
+        [timePerPage_m2 insertObject:newTime atIndex:3];
         [self startTimer];
     } if([pageLabel.text isEqualToString:@"5"]) {
-        pageViews[4] = pageViews[4] + 1;
+        pageViews_m2[4] = pageViews_m2[4] + 1;
         NSNumber *currentTime = [self cancelTimer];
-        NSNumber *oldTime = [timePerPage objectAtIndex:4];
+        NSNumber *oldTime = [timePerPage_m2 objectAtIndex:4];
         NSNumber *newTime = [NSNumber numberWithFloat:([currentTime floatValue] + [oldTime floatValue])];
-        [timePerPage insertObject:newTime atIndex:4];
+        [timePerPage_m2 insertObject:newTime atIndex:4];
         [self startTimer];
     } if([pageLabel.text isEqualToString:@"6"]) {
-        pageViews[5] = pageViews[5] + 1;
+        pageViews_m2[5] = pageViews_m2[5] + 1;
         NSNumber *currentTime = [self cancelTimer];
-        NSNumber *oldTime = [timePerPage objectAtIndex:5];
+        NSNumber *oldTime = [timePerPage_m2 objectAtIndex:5];
         NSNumber *newTime = [NSNumber numberWithFloat:([currentTime floatValue] + [oldTime floatValue])];
-        [timePerPage insertObject:newTime atIndex:5];
+        [timePerPage_m2 insertObject:newTime atIndex:5];
         [self startTimer];
     }
     
@@ -125,10 +125,10 @@ NSDate* startDate;
             [self performSelector:@selector(quizDelay) withObject:nil afterDelay:.5];
         }
         
-        if (image_index<[images count]-1) {
-            image_index++;
+        if (imageIndex_m2<[images_m2 count]-1) {
+            imageIndex_m2++;
             
-            pageLabel.text = [NSString stringWithFormat:@"%i",image_index+1];
+            pageLabel.text = [NSString stringWithFormat:@"%i",imageIndex_m2+1];
             
             CATransition *animation = [CATransition animation];
             [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
@@ -137,15 +137,15 @@ NSDate* startDate;
             [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
             [[self.image layer] addAnimation:animation forKey:nil];
             
-            image.image = [UIImage imageNamed:[images objectAtIndex:image_index]];
+            image.image = [UIImage imageNamed:[images_m2 objectAtIndex:imageIndex_m2]];
         }
     }
     
     if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
-        if (image_index>0) {
-            image_index--;
+        if (imageIndex_m2>0) {
+            imageIndex_m2--;
             
-            pageLabel.text = [NSString stringWithFormat:@"%i",image_index+1];
+            pageLabel.text = [NSString stringWithFormat:@"%i",imageIndex_m2+1];
             
             CATransition *animation = [CATransition animation];
             [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
@@ -154,7 +154,7 @@ NSDate* startDate;
             [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
             [[self.image layer] addAnimation:animation forKey:nil];
             
-            image.image = [UIImage imageNamed:[images objectAtIndex:image_index]];
+            image.image = [UIImage imageNamed:[images_m2 objectAtIndex:imageIndex_m2]];
         }
     }
     
@@ -177,27 +177,27 @@ NSDate* startDate;
     [image addGestureRecognizer:swipeLeft];
     [image addGestureRecognizer:swipeRight];
     
-    image.image = [UIImage imageNamed:[images objectAtIndex:image_index]];
+    image.image = [UIImage imageNamed:[images_m2 objectAtIndex:imageIndex_m2]];
     beginModuleButton.hidden = YES;
-    pageLabel.text = [NSString stringWithFormat:@"%i",image_index+1];
+    pageLabel.text = [NSString stringWithFormat:@"%i",imageIndex_m2+1];
     [self startTimer];
 }
 
 - (IBAction)continueToQuiz:(id)sender {
-    pageViews[6] = pageViews[6] + 1;
+    pageViews_m2[6] = pageViews_m2[6] + 1;
     NSNumber *currentTime = [self cancelTimer];
-    NSNumber *oldTime = [timePerPage objectAtIndex:6];
+    NSNumber *oldTime = [timePerPage_m2 objectAtIndex:6];
     NSNumber *newTime = [NSNumber numberWithFloat:([currentTime floatValue] + [oldTime floatValue])];
-    [timePerPage insertObject:newTime atIndex:6];
+    [timePerPage_m2 insertObject:newTime atIndex:6];
     
     
     /*SEND TO SERVER HERE*/
     NSLog(@"SENDING TO SERVER:");
     for (int i = 0; i < 7; i++) {
-        NSLog(@"Visited page %i %i times and spent %@ seconds  there.",i+1,pageViews[i],[timePerPage objectAtIndex:i]);
+        NSLog(@"Visited page %i %i times and spent %@ seconds  there.",i+1,pageViews_m2[i],[timePerPage_m2 objectAtIndex:i]);
     }
     
-    NSLog(@"Total time for Module 2: %f",total2);
+    NSLog(@"Total time for Module 2: %f",total_m2);
     
     [self performSegueWithIdentifier: @"toQuiz2" sender: self];
 }

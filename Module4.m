@@ -19,18 +19,18 @@
 @synthesize player;
 @synthesize introImage;
 @synthesize continueButton;
-UIAlertView *alert;
-float lastPlayback = 0.0;
-float currentPlayback = 0.0;
+UIAlertView *alert_m4;
+float lastPlayback_m4 = 0.0;
+float currentPlayback_m4 = 0.0;
 
 - (void)viewDidLoad {
 }
 
 - (IBAction)startModule:(id)sender {
     
-    alert = [[UIAlertView alloc] initWithTitle:@"Warning!" message:@"\nModule 4 contains graphic content."  delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:nil];
-    alert.tag = 1;
-    [alert show];
+    alert_m4 = [[UIAlertView alloc] initWithTitle:@"Warning!" message:@"\nModule 4 contains graphic content."  delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:nil];
+    alert_m4.tag = 1;
+    [alert_m4 show];
     
 }
 
@@ -65,16 +65,16 @@ float currentPlayback = 0.0;
     if (player.playbackState == MPMoviePlaybackStatePlaying)
     {
         
-        currentPlayback = player.currentPlaybackTime;
+        currentPlayback_m4 = player.currentPlaybackTime;
         
         NSLog(@"Playing at %f",player.currentPlaybackTime);
-        if (currentPlayback > lastPlayback) {
-            NSLog(@"Fast Forwarded to %f",currentPlayback);
+        if (currentPlayback_m4 > lastPlayback_m4) {
+            NSLog(@"Fast Forwarded to %f",currentPlayback_m4);
         } else {
             NSLog(@"Rewinded to %f",player.currentPlaybackTime);
         }
         
-        lastPlayback = currentPlayback;
+        lastPlayback_m4 = currentPlayback_m4;
         
     }
     
@@ -90,14 +90,14 @@ float currentPlayback = 0.0;
     
 }
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
-    alert = [[UIAlertView alloc] initWithTitle:@"Continue to Video Quiz?" message:@"\nYou cannot return to the video once you start the quiz."  delegate:self cancelButtonTitle:@"Rewatch Video" otherButtonTitles: @"Continue", nil];
-    alert.tag = 2;
-    [alert show];
+    alert_m4 = [[UIAlertView alloc] initWithTitle:@"Continue to Video Quiz?" message:@"\nYou cannot return to the video once you start the quiz."  delegate:self cancelButtonTitle:@"Rewatch Video" otherButtonTitles: @"Continue", nil];
+    alert_m4.tag = 2;
+    [alert_m4 show];
 
 }
 
-- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alert.tag == 1) {
+- (void)alert_m4View:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alert_m4.tag == 1) {
         [self playMovie];
     } else {
         if (buttonIndex == 0)

@@ -27,11 +27,6 @@
 @end
 
 @implementation Test
-NSArray *answers;
-NSArray *questions;
-NSMutableArray *userAnswers;
-int questions_index;
-int numberCorrect = 0;
 @synthesize image;
 @synthesize aButton;
 @synthesize bButton;
@@ -46,47 +41,53 @@ int numberCorrect = 0;
 @synthesize posButton;
 @synthesize invButton;
 @synthesize secretButton;
-NSMutableArray *timePerTestPage;
-NSNumber *sum5;
-NSTimer *transitionTimer;
-NSDate* startDate;
-NSMutableArray *answersToTest;
-NSMutableArray *correctVincorrect;
+
+NSArray *answers_te;
+NSArray *questions_te;
+NSMutableArray *userAnswers_te;
+int questionsIndex_te;
+int numberCorrect_te = 0;
+NSMutableArray *timePerTestPage_te;
+NSNumber *sum_te;
+NSTimer *transitionTimer_te;
+NSDate* startDate_te;
+NSMutableArray *answersToTest_te;
+NSMutableArray *correctOrIncorrect_te;
 
 - (NSNumber*)cancelTimer {
-    NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
+    NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate_te];
     NSNumber *currentTime = [NSNumber numberWithDouble:elapsedTime];
-    [transitionTimer invalidate];
+    [transitionTimer_te invalidate];
     return currentTime;
 }
 
 - (void)startTimer {
-    startDate = [NSDate date];
+    startDate_te = [NSDate date];
     [self startTimerMethod];
 }
 
 - (void) startTimerMethod {
-    transitionTimer = [NSTimer scheduledTimerWithTimeInterval:3600.0 target:self selector:nil userInfo:nil repeats:NO];
+    transitionTimer_te = [NSTimer scheduledTimerWithTimeInterval:3600.0 target:self selector:nil userInfo:nil repeats:NO];
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    userAnswers = [[NSMutableArray alloc] init];
+    userAnswers_te = [[NSMutableArray alloc] init];
     
-    timePerTestPage = [[NSMutableArray alloc] init];
+    timePerTestPage_te = [[NSMutableArray alloc] init];
     
-    correctVincorrect = [[NSMutableArray alloc] init];
+    correctOrIncorrect_te = [[NSMutableArray alloc] init];
     
     [self startTimer];
     
-    questions_index = 0;
+    questionsIndex_te = 0;
     
-    answers = @[@"a",@"d",@"e",@"b",@"f",@"b",@"d",@"c",@"c",@"d",@"b",@"a",@"c",@"a",@"b",@"c"];
-    questions = @[@"Q1.png",@"Q2.png",@"Q3.png",@"Q4.png",@"Q5.png",@"Q6.png",@"Q7.png",@"Q8.png",@"Q9.png",@"Q10.png",@"Q11.png",@"Q12.png",@"Q13.png",@"Q14.png",@"Q15.png",@"Q16.png"];
+    answers_te = @[@"a",@"d",@"e",@"b",@"f",@"b",@"d",@"c",@"c",@"d",@"b",@"a",@"c",@"a",@"b",@"c"];
+    questions_te = @[@"Q1.png",@"Q2.png",@"Q3.png",@"Q4.png",@"Q5.png",@"Q6.png",@"Q7.png",@"Q8.png",@"Q9.png",@"Q10.png",@"Q11.png",@"Q12.png",@"Q13.png",@"Q14.png",@"Q15.png",@"Q16.png"];
     
-    image.image = [UIImage imageNamed:[questions objectAtIndex:0]];
+    image.image = [UIImage imageNamed:[questions_te objectAtIndex:0]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,48 +96,48 @@ NSMutableArray *correctVincorrect;
 }
 
 - (IBAction)aClicked:(id)sender {
-    [userAnswers addObject:@"a"];
-    NSLog(@"%@",userAnswers);
+    [userAnswers_te addObject:@"a"];
+    NSLog(@"%@",userAnswers_te);
     [self continueTest];
 }
 
 - (IBAction)bClicked:(id)sender {
-    [userAnswers addObject:@"b"];
-    NSLog(@"%@",userAnswers);
+    [userAnswers_te addObject:@"b"];
+    NSLog(@"%@",userAnswers_te);
     [self continueTest];
 }
 
 - (IBAction)cClicked:(id)sender {
-    [userAnswers addObject:@"c"];
-    NSLog(@"%@",userAnswers);
+    [userAnswers_te addObject:@"c"];
+    NSLog(@"%@",userAnswers_te);
     [self continueTest];
 }
 
 - (IBAction)dClicked:(id)sender {
-    [userAnswers addObject:@"d"];
-    NSLog(@"%@",userAnswers);
+    [userAnswers_te addObject:@"d"];
+    NSLog(@"%@",userAnswers_te);
     [self continueTest];
 }
 
 - (IBAction)eClicked:(id)sender {
-    [userAnswers addObject:@"e"];
-    NSLog(@"%@",userAnswers);
+    [userAnswers_te addObject:@"e"];
+    NSLog(@"%@",userAnswers_te);
     [self continueTest];
 }
 
 - (IBAction)fClicked:(id)sender {
-    [userAnswers addObject:@"f"];
-    NSLog(@"%@",userAnswers);
+    [userAnswers_te addObject:@"f"];
+    NSLog(@"%@",userAnswers_te);
     [self continueTest];
 }
 
 -(void) continueTest {
     
-    if(questions_index <=14) {
+    if(questionsIndex_te <=14) {
         NSNumber *currentTime = [self cancelTimer];
-        [timePerTestPage addObject:currentTime];
+        [timePerTestPage_te addObject:currentTime];
         [self startTimer];
-        questions_index++;
+        questionsIndex_te++;
         CATransition *animation = [CATransition animation];
         [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
         [animation setType:kCATransitionPush]; //New image will push the old image off
@@ -144,9 +145,9 @@ NSMutableArray *correctVincorrect;
         [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
         [[self.image layer] addAnimation:animation forKey:nil];
         
-        image.image = [UIImage imageNamed:[questions objectAtIndex:questions_index]];
+        image.image = [UIImage imageNamed:[questions_te objectAtIndex:questionsIndex_te]];
         
-        if(questions_index == 1) {
+        if(questionsIndex_te == 1) {
             aButton.hidden = YES;
             bButton.hidden = YES;
             cButton.hidden = YES;
@@ -154,7 +155,7 @@ NSMutableArray *correctVincorrect;
             eButton.hidden = YES;
             fButton.hidden = YES;
             [self performSelector:@selector(Q2) withObject:nil afterDelay:.5];
-        } else if (questions_index == 2) {
+        } else if (questionsIndex_te == 2) {
             aButton.hidden = YES;
             bButton.hidden = YES;
             cButton.hidden = YES;
@@ -162,7 +163,7 @@ NSMutableArray *correctVincorrect;
             eButton.hidden = YES;
             fButton.hidden = YES;
             [self performSelector:@selector(Q3) withObject:nil afterDelay:.5];
-        } else if (questions_index ==3) {
+        } else if (questionsIndex_te ==3) {
             aButton.hidden = YES;
             bButton.hidden = YES;
             cButton.hidden = YES;
@@ -170,7 +171,7 @@ NSMutableArray *correctVincorrect;
             eButton.hidden = YES;
             fButton.hidden = YES;
             [self performSelector:@selector(Q4) withObject:nil afterDelay:.5];
-        } else if (questions_index == 4) {
+        } else if (questionsIndex_te == 4) {
             aButton.hidden = YES;
             bButton.hidden = YES;
             cButton.hidden = YES;
@@ -178,7 +179,7 @@ NSMutableArray *correctVincorrect;
             eButton.hidden = YES;
             fButton.hidden = YES;
             [self performSelector:@selector(Q5) withObject:nil afterDelay:.5];
-        } else if (questions_index == 5) {
+        } else if (questionsIndex_te == 5) {
             aButton.hidden = YES;
             bButton.hidden = YES;
             cButton.hidden = YES;
@@ -186,7 +187,7 @@ NSMutableArray *correctVincorrect;
             eButton.hidden = YES;
             fButton.hidden = YES;
             [self performSelector:@selector(Q6) withObject:nil afterDelay:.5];
-        } else if (questions_index == 6) {
+        } else if (questionsIndex_te == 6) {
             aButton.hidden = YES;
             bButton.hidden = YES;
             cButton.hidden = YES;
@@ -194,7 +195,7 @@ NSMutableArray *correctVincorrect;
             eButton.hidden = YES;
             fButton.hidden = YES;
             [self performSelector:@selector(Q7) withObject:nil afterDelay:.5];
-        } else if (questions_index == 7) {
+        } else if (questionsIndex_te == 7) {
             aButton.hidden = YES;
             bButton.hidden = YES;
             cButton.hidden = YES;
@@ -202,7 +203,7 @@ NSMutableArray *correctVincorrect;
             eButton.hidden = YES;
             fButton.hidden = YES;
             [self performSelector:@selector(Q8) withObject:nil afterDelay:.5];
-        } else if (questions_index == 8) {
+        } else if (questionsIndex_te == 8) {
             aButton.hidden = YES;
             bButton.hidden = YES;
             cButton.hidden = YES;
@@ -210,7 +211,7 @@ NSMutableArray *correctVincorrect;
             eButton.hidden = YES;
             fButton.hidden = YES;
             [self performSelector:@selector(Q9) withObject:nil afterDelay:.5];
-        } else if (questions_index == 9) {
+        } else if (questionsIndex_te == 9) {
             aButton.hidden = YES;
             bButton.hidden = YES;
             cButton.hidden = YES;
@@ -231,14 +232,14 @@ NSMutableArray *correctVincorrect;
     } else {
         
         NSNumber *currentTime = [self cancelTimer];
-        [timePerTestPage addObject:currentTime];
+        [timePerTestPage_te addObject:currentTime];
         
-        for (int counter = 0; counter < [answers count]; counter++) {
-            if([[answers objectAtIndex:counter] isEqualToString:[userAnswers objectAtIndex:counter]]) {
-                [correctVincorrect addObject:@"correct"];
-                numberCorrect++;
+        for (int counter = 0; counter < [answers_te count]; counter++) {
+            if([[answers_te objectAtIndex:counter] isEqualToString:[userAnswers_te objectAtIndex:counter]]) {
+                [correctOrIncorrect_te addObject:@"correct"];
+                numberCorrect_te++;
             } else {
-                [correctVincorrect addObject:@"incorrect"];
+                [correctOrIncorrect_te addObject:@"incorrect"];
             }
         }
         
@@ -264,17 +265,17 @@ NSMutableArray *correctVincorrect;
         NSLog(@"SENDING TO SERVER:");
         
         for (int counter = 0; counter < 15; counter++) {
-            NSLog(@"Question %i: %@",counter+1,[correctVincorrect objectAtIndex:counter]);
+            NSLog(@"Question %i: %@",counter+1,[correctOrIncorrect_te objectAtIndex:counter]);
         }
         
         for (int i = 0; i < 15; i++) {
-            NSLog(@"Spent %@ seconds on %i.",[timePerTestPage objectAtIndex:i],i+1);
-            NSNumber *currentTotal = [timePerTestPage objectAtIndex:i];
-            sum5 = [NSNumber numberWithFloat:([sum5 floatValue] + [currentTotal floatValue])];
+            NSLog(@"Spent %@ seconds on %i.",[timePerTestPage_te objectAtIndex:i],i+1);
+            NSNumber *currentTotal = [timePerTestPage_te objectAtIndex:i];
+            sum_te = [NSNumber numberWithFloat:([sum_te floatValue] + [currentTotal floatValue])];
         }
-        NSLog(@"Total time for Test: %@",sum5);
+        NSLog(@"Total time for Test: %@",sum_te);
         
-        int score = numberCorrect/16.0 * 100.0;
+        int score = numberCorrect_te/16.0 * 100.0;
         
         NSLog(@"Score: %i",score);
         

@@ -16,13 +16,13 @@ using namespace cv;
 
 @implementation AppDelegate
 
-dispatch_queue_t backgroundQueue;
-int numberOfFrames = 0;
-int fileNumber = 0;
+dispatch_queue_t backgroundQueue_ad;
+int numberOfFrames_ad = 0;
+int fileNumber_ad = 0;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    backgroundQueue = dispatch_queue_create("com.mycompany.myqueue", DISPATCH_QUEUE_SERIAL);
+    backgroundQueue_ad = dispatch_queue_create("com.mycompany.myqueue", DISPATCH_QUEUE_SERIAL);
     
     UITextField *lagFreeField = [[UITextField alloc] init];
     [self.window addSubview:lagFreeField];
@@ -70,22 +70,22 @@ int fileNumber = 0;
 
 - (void)sendFramesAndWriteToFile:(Mat*)matBuffer:(int)matBufferLength:(string)module:(string)page{
     NSLog(@"Started sending frames");
-    fileNumber = fileNumber + 1;
+    fileNumber_ad = fileNumber_ad + 1;
     NSString *text = [NSString stringWithFormat:@""];
-    NSString *fileName = [NSString stringWithFormat:@"%s-%d", module.c_str(), fileNumber];
+    NSString *fileName = [NSString stringWithFormat:@"%s-%d", module.c_str(), fileNumber_ad];
     for(int i = 0; i < matBufferLength; i++) {
         UIImage *uImage = [self imageWithCVMat:matBuffer[i]];
         NSData *dataObj = UIImageJPEGRepresentation(uImage, 1.0);
         //int bytes = [dataObj length];
         NSString *byteArray = [dataObj base64Encoding];
-        NSString *thisTemp = [NSString stringWithFormat:@"image%d", numberOfFrames++];
+        NSString *thisTemp = [NSString stringWithFormat:@"image%d", numberOfFrames_ad++];
         text = [NSString stringWithFormat:@"%@%@%@", text, thisTemp, byteArray];
         //NSLog(text);
     }
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *appFile = [documentsDirectory stringByAppendingPathComponent:fileName];
-    dispatch_async(backgroundQueue, ^{
+    dispatch_async(backgroundQueue_ad, ^{
         [text writeToFile:appFile atomically:YES];
     });
 

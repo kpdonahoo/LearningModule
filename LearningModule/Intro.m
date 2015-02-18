@@ -17,13 +17,13 @@
 @implementation Intro
 @synthesize image;
 @synthesize beginButton;
-NSArray *images;
-int image_index;
+NSArray *images_in;
+int imageIndex_in;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    image_index = 0;
-    images = @[@"Intro1",@"Intro2.png",@"Intro3.png"];
+    imageIndex_in = 0;
+    images_in = @[@"Intro1",@"Intro2.png",@"Intro3.png"];
 
 UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
 UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
@@ -42,8 +42,8 @@ UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWit
     
     if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
         
-        if (image_index<[images count]-1) {
-            image_index++;
+        if (imageIndex_in<[images_in count]-1) {
+            imageIndex_in++;
             
             CATransition *animation = [CATransition animation];
             [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
@@ -52,11 +52,11 @@ UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWit
             [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
             [[self.image layer] addAnimation:animation forKey:nil];
             
-            image.image = [UIImage imageNamed:[images objectAtIndex:image_index]];
+            image.image = [UIImage imageNamed:[images_in objectAtIndex:imageIndex_in]];
             
         }
         
-        if (image_index==[images count]-1) {
+        if (imageIndex_in==[images_in count]-1) {
             
             CATransition *animation = [CATransition animation];
             animation.type = kCATransitionFade;
@@ -69,8 +69,8 @@ UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWit
     }
     
     if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
-        if (image_index>0) {
-            image_index--;
+        if (imageIndex_in>0) {
+            imageIndex_in--;
             
             CATransition *animation = [CATransition animation];
             [animation setDuration:0.5]; //Animate for a duration of 1.0 seconds
@@ -79,7 +79,7 @@ UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWit
             [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
             [[self.image layer] addAnimation:animation forKey:nil];
             
-            image.image = [UIImage imageNamed:[images objectAtIndex:image_index]];
+            image.image = [UIImage imageNamed:[images_in objectAtIndex:imageIndex_in]];
         }
     }
     

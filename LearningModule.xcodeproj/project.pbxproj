@@ -147,7 +147,7 @@
 		37F177F91A86DEC7005013A1 /* Module1Q3.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F177F61A86DEC7005013A1 /* Module1Q3.png */; };
 		37F177FA1A86DEC7005013A1 /* Module1Q3C.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F177F71A86DEC7005013A1 /* Module1Q3C.png */; };
 		37F177FB1A86DEC7005013A1 /* Module1Q3I.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F177F81A86DEC7005013A1 /* Module1Q3I.png */; };
-		37F178021A86E8ED005013A1 /* Module2.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F178011A86E8ED005013A1 /* Module2.m */; };
+		37F178021A86E8ED005013A1 /* Module2.mm in Sources */ = {isa = PBXBuildFile; fileRef = 37F178011A86E8ED005013A1 /* Module2.mm */; };
 		37F178061A86EAC0005013A1 /* Module2-7 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F178051A86EAC0005013A1 /* Module2-7 copy.png */; };
 		37F1780A1A86F0B8005013A1 /* Module2Q2I.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F178071A86F0B8005013A1 /* Module2Q2I.png */; };
 		37F1780B1A86F0B8005013A1 /* Module2Q2C.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F178081A86F0B8005013A1 /* Module2Q2C.png */; };
@@ -342,7 +342,7 @@
 		37F177F71A86DEC7005013A1 /* Module1Q3C.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Module1Q3C.png; sourceTree = "<group>"; };
 		37F177F81A86DEC7005013A1 /* Module1Q3I.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Module1Q3I.png; sourceTree = "<group>"; };
 		37F178001A86E8ED005013A1 /* Module2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Module2.h; sourceTree = "<group>"; };
-		37F178011A86E8ED005013A1 /* Module2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Module2.m; sourceTree = "<group>"; };
+		37F178011A86E8ED005013A1 /* Module2.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Module2.mm; sourceTree = "<group>"; };
 		37F178051A86EAC0005013A1 /* Module2-7 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Module2-7 copy.png"; sourceTree = "<group>"; };
 		37F178071A86F0B8005013A1 /* Module2Q2I.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Module2Q2I.png; sourceTree = "<group>"; };
 		37F178081A86F0B8005013A1 /* Module2Q2C.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Module2Q2C.png; sourceTree = "<group>"; };
@@ -670,7 +670,7 @@
 				37F0A0C11A868A4800833582 /* Module1Quiz.h */,
 				37F0A0C21A868A4800833582 /* Module1Quiz.m */,
 				37F178001A86E8ED005013A1 /* Module2.h */,
-				37F178011A86E8ED005013A1 /* Module2.m */,
+				37F178011A86E8ED005013A1 /* Module2.mm */,
 				37F1780D1A86F0EC005013A1 /* Module2Quiz.h */,
 				37F1780E1A86F0EC005013A1 /* Module2Quiz.m */,
 				37A457891A8711C5004C4634 /* Module3.h */,
@@ -970,7 +970,7 @@
 				37F0A0BC1A85D99600833582 /* Module1.mm in Sources */,
 				3896FF371A85A14400144A32 /* AppDelegate.mm in Sources */,
 				3896FF341A85A14400144A32 /* main.m in Sources */,
-				37F178021A86E8ED005013A1 /* Module2.m in Sources */,
+				37F178021A86E8ED005013A1 /* Module2.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

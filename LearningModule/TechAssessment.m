@@ -23,15 +23,15 @@
 @synthesize penguin;
 @synthesize toModule1;
 @synthesize techCopy;
-int swipedLeft = 0;
-NSTimer *transitionTimer;
-NSDate* startDate;
+int swipedLeft_ta = 0;
+NSTimer *transitionTimer_ta;
+NSDate* startDate_ta;
 
-NSTimeInterval total;
-NSString *swipeInterval;
-NSString *clickInterval;
-NSString *continueInterval;
-NSString *totalInterval;
+NSTimeInterval total_ta;
+NSString *swipeInterval_ta;
+NSString *clickInterval_ta;
+NSString *continueInterval_ta;
+NSString *totalInterval_ta;
 
 
 
@@ -41,20 +41,20 @@ NSString *totalInterval;
 }
 
 - (NSString*)cancelTimer {
-    NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate];
-    total +=elapsedTime;
+    NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate_ta];
+    total_ta +=elapsedTime;
     NSString *interval = [NSString stringWithFormat:@"%f", elapsedTime];
-    [transitionTimer invalidate];
+    [transitionTimer_ta invalidate];
     return interval;
 }
 
 - (void)startTimer {
-    startDate = [NSDate date];
+    startDate_ta = [NSDate date];
     [self startTimerMethod];
 }
 
 - (void) startTimerMethod {
-    transitionTimer = [NSTimer scheduledTimerWithTimeInterval:3600.0 target:self selector:nil userInfo:nil repeats:NO];
+    transitionTimer_ta = [NSTimer scheduledTimerWithTimeInterval:3600.0 target:self selector:nil userInfo:nil repeats:NO];
 }
 
 - (void)viewDidLoad {
@@ -77,12 +77,12 @@ NSString *totalInterval;
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
     
     if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
-        swipedLeft = 1;
+        swipedLeft_ta = 1;
         swipe_image.image = [UIImage imageNamed:@"swipeLeft"];
     }
-    if (swipe.direction == UISwipeGestureRecognizerDirectionRight && swipedLeft == 1)  {
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight && swipedLeft_ta == 1)  {
         swipe_image.image = [UIImage imageNamed:@"swipeRight"];
-        swipeInterval = [self cancelTimer];
+        swipeInterval_ta = [self cancelTimer];
         [self performSelector:@selector(delaySwipe) withObject:nil afterDelay:.5];
         
     }
@@ -100,7 +100,7 @@ NSString *totalInterval;
 }
 
 - (IBAction)penguinClicked:(id)sender {
-    clickInterval = [self cancelTimer];
+    clickInterval_ta = [self cancelTimer];
     penguin.hidden = TRUE;
     techCopy.hidden = YES;
     swipe_image.frame = CGRectMake(223,195,578,440);
@@ -120,15 +120,15 @@ NSString *totalInterval;
 }
 
 - (IBAction)toModule1Clicked:(id)sender {
-    continueInterval = [self cancelTimer];
-    totalInterval = [NSString stringWithFormat:@"%f", total];
+    continueInterval_ta = [self cancelTimer];
+    totalInterval_ta = [NSString stringWithFormat:@"%f", total_ta];
     
     /*SEND TO SERVER HERE*/
     NSLog(@"SENDING TO SERVER:");
-    NSLog(@"Swipe Interval: %@",swipeInterval);
-    NSLog(@"Click Interval: %@",clickInterval);
-    NSLog(@"Continue Interval: %@",continueInterval);
-    NSLog(@"Total Interval: %@",totalInterval);
+    NSLog(@"Swipe Interval: %@",swipeInterval_ta);
+    NSLog(@"Click Interval: %@",clickInterval_ta);
+    NSLog(@"Continue Interval: %@",continueInterval_ta);
+    NSLog(@"total_ta Interval: %@",totalInterval_ta);
     
     [self performSegueWithIdentifier:@"toModule1" sender:self];
 }
