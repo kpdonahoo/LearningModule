@@ -35,6 +35,7 @@ using namespace cv;
 @synthesize beginModuleButton;
 @synthesize continueToQuizButton;
 @synthesize pageLabel;
+
 NSArray *images_m1;
 int imageIndex_m1;
 int pageViews_m1[11];
@@ -43,11 +44,10 @@ NSTimeInterval total_m1;
 NSTimer *transitionTimer_m1;
 NSDate* startDate_m1;
 AppDelegate *appDelegate_m1;
-
-Mat imageFrames[48];
-int frameCount = 0;
-int frameNumber = 0;
-NSString *frame;
+Mat imageFrames_m1[48];
+int frameCount_m1 = 0;
+int frameNumber_m1 = 0;
+NSString *frame_m1;
 
 - (NSNumber*)cancelTimer {
     NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate_m1];
@@ -111,14 +111,14 @@ NSString *frame;
 
 -(void)processImage:(Mat&)image; {
     Mat grayFrame, output;
-    imageFrames[frameCount] = image;
-    frameCount++;
+    imageFrames_m1[frameCount_m1] = image;
+    frameCount_m1++;
     
-    if(frameCount == 48) {
-        frame = [NSString stringWithFormat:@"%d", frameNumber];
-        frameNumber = frameNumber + 1;
-        [appDelegate_m1 sendFramesAndWriteToFile:imageFrames:frameCount:"M1":pageLabel.text.UTF8String];
-        frameCount = 0;
+    if(frameCount_m1 == 48) {
+        frame_m1 = [NSString stringWithFormat:@"%d", frameNumber_m1];
+        frameNumber_m1 = frameNumber_m1 + 1;
+        [appDelegate_m1 sendFramesAndWriteToFile:imageFrames_m1:frameCount_m1:"M1":pageLabel.text.UTF8String];
+        frameCount_m1 = 0;
     }
   
 }
@@ -278,7 +278,7 @@ NSString *frame;
     }
     NSLog(@"Total time for Module 1: %f",total_m1);
     [appDelegate_m1 changeModuleAndHandleTimers:timePerPage_m1:nullptr:@"M1"];
-    [appDelegate_m1 sendFramesAndWriteToFile:imageFrames:frameCount:"M1":pageLabel.text.UTF8String];
+    [appDelegate_m1 sendFramesAndWriteToFile:imageFrames_m1:frameCount_m1:"M1":pageLabel.text.UTF8String];
     [self performSegueWithIdentifier: @"toQuiz" sender: self];
 }
 

@@ -7,24 +7,85 @@
 //
 
 #import "Module4.h"
+#ifdef __cplusplus
+#import <opencv2/videoio/cap_ios.h>
+#import <opencv2/opencv.hpp>
+#import <opencv2/imgproc/imgproc.hpp>
+#import <opencv2/highgui/highgui_c.h>
+#import <opencv2/core/core.hpp>
+#endif
+#import "AppDelegate.h"
 
-@interface Module4 () <UIAlertViewDelegate>
+using namespace cv;
+
+@interface Module4 () <UIAlertViewDelegate, CvVideoCameraDelegate>
 @property (strong, nonatomic) MPMoviePlayerController *player;
 @property (weak, nonatomic) IBOutlet UIImageView *introImage;
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
+@property (strong, nonatomic) UIView *cameraOutput;
+@property (strong, nonatomic) CvVideoCamera* videoCamera;
 
 @end
 
 @implementation Module4
+@synthesize cameraOutput;
 @synthesize player;
 @synthesize introImage;
 @synthesize continueButton;
+
 UIAlertView *alert_m4;
 float lastPlayback_m4 = 0.0;
 float currentPlayback_m4 = 0.0;
+Mat imageFrames_m4[48];
+int frameCount_m4 = 0;
+int frameNumber_m4 = 0;
+NSString *frame_m4;
+AppDelegate *appDelegate_m4;
+
 
 - (void)viewDidLoad {
+    
+    [self.videoCamera start];
+    appDelegate_m4 = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [self.videoCamera stop];
+}
+
+#ifdef __cplusplus
+-(CvVideoCamera *)videoCamera{
+    if(!_videoCamera) {
+        _videoCamera = [[CvVideoCamera alloc] initWithParentView:self.cameraOutput];
+        _videoCamera.delegate = self;
+        _videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
+        _videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset640x480;
+        _videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+        _videoCamera.defaultFPS =10;
+        _videoCamera.grayscaleMode = NO;
+        
+    }
+    
+    return _videoCamera;
+    
+}
+
+-(void)processImage:(Mat&)image; {
+    Mat grayFrame, output;
+    imageFrames_m4[frameCount_m4] = image;
+    frameCount_m4++;
+    
+    if(frameCount_m4 == 48) {
+        frame_m4 = [NSString stringWithFormat:@"%d", frameNumber_m4];
+        frameNumber_m4 = frameNumber_m4 + 1;
+        [appDelegate_m4 sendFramesAndWriteToFile:imageFrames_m4:frameCount_m4:"M4":"video"];
+        frameCount_m4 = 0;
+    }
+    
+}
+
+#endif
+
 
 - (IBAction)startModule:(id)sender {
     

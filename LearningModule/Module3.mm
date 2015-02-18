@@ -7,17 +7,29 @@
 //
 
 #import "Module3.h"
+#ifdef __cplusplus
+#import <opencv2/videoio/cap_ios.h>
+#import <opencv2/opencv.hpp>
+#import <opencv2/imgproc/imgproc.hpp>
+#import <opencv2/highgui/highgui_c.h>
+#import <opencv2/core/core.hpp>
+#endif
+#import "AppDelegate.h"
 
-@interface Module3 ()
+using namespace cv;
+
+@interface Module3 () <CvVideoCameraDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *beginModuleButton;
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UIButton *continueToQuizButton;
 @property (weak, nonatomic) IBOutlet UILabel *pageLabel;
+@property (strong, nonatomic) UIView *cameraOutput;
+@property (strong, nonatomic) CvVideoCamera* videoCamera;
 
 @end
 
 @implementation Module3
-
+@synthesize cameraOutput;
 @synthesize image;
 @synthesize beginModuleButton;
 @synthesize continueToQuizButton;
@@ -29,6 +41,11 @@ NSMutableArray *timePerPage_m3;
 NSTimeInterval total_m3;
 NSTimer *transitionTimer_m3;
 NSDate* startDate_m3;
+Mat imageFrames_m3[48];
+int frameCount_m3 = 0;
+int frameNumber_m3 = 0;
+NSString *frame_m3;
+AppDelegate *appDelegate_m3;
 
 
 - (NSNumber*)cancelTimer {
@@ -53,6 +70,9 @@ NSDate* startDate_m3;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.videoCamera start];
+    appDelegate_m3 = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     [image setUserInteractionEnabled:YES];
     NSNumber *dummy = @0;
     timePerPage_m3 = [[NSMutableArray alloc] init];
@@ -74,6 +94,44 @@ NSDate* startDate_m3;
     
     images_m3 = @[@"Module3-1.png",@"Module3-2.png",@"Module3-3.png",@"Module3-4.png",@"Module3-5.png",@"Module3-6.png",@"Module3-7.png",@"Module3-8.png",@"Module3-9.png",@"Module3-10.png",@"Module3-11.png"];
 }
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [self.videoCamera stop];
+}
+
+#ifdef __cplusplus
+-(CvVideoCamera *)videoCamera{
+    if(!_videoCamera) {
+        _videoCamera = [[CvVideoCamera alloc] initWithParentView:self.cameraOutput];
+        _videoCamera.delegate = self;
+        _videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
+        _videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset640x480;
+        _videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+        _videoCamera.defaultFPS =10;
+        _videoCamera.grayscaleMode = NO;
+        
+    }
+    
+    return _videoCamera;
+    
+}
+
+-(void)processImage:(Mat&)image; {
+    Mat grayFrame, output;
+    imageFrames_m3[frameCount_m3] = image;
+    frameCount_m3++;
+    
+    if(frameCount_m3 == 48) {
+        frame_m3 = [NSString stringWithFormat:@"%d", frameNumber_m3];
+        frameNumber_m3 = frameNumber_m3 + 1;
+        [appDelegate_m3 sendFramesAndWriteToFile:imageFrames_m3:frameCount_m3:"M3":pageLabel.text.UTF8String];
+        frameCount_m3 = 0;
+    }
+    
+}
+
+#endif
+
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
     

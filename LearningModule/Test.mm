@@ -7,8 +7,18 @@
 //
 
 #import "Test.h"
+#ifdef __cplusplus
+#import <opencv2/videoio/cap_ios.h>
+#import <opencv2/opencv.hpp>
+#import <opencv2/imgproc/imgproc.hpp>
+#import <opencv2/highgui/highgui_c.h>
+#import <opencv2/core/core.hpp>
+#endif
+#import "AppDelegate.h"
 
-@interface Test ()
+using namespace cv;
+
+@interface Test () <CvVideoCameraDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *secretButton;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *image;
@@ -23,10 +33,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *negButton;
 @property (weak, nonatomic) IBOutlet UIButton *posButton;
 @property (weak, nonatomic) IBOutlet UIButton *invButton;
+@property (strong, nonatomic) UIView *cameraOutput;
+@property (strong, nonatomic) CvVideoCamera* videoCamera;
 
 @end
 
 @implementation Test
+@synthesize cameraOutput;
 @synthesize image;
 @synthesize aButton;
 @synthesize bButton;
@@ -53,6 +66,12 @@ NSTimer *transitionTimer_te;
 NSDate* startDate_te;
 NSMutableArray *answersToTest_te;
 NSMutableArray *correctOrIncorrect_te;
+Mat imageFrames_te[48];
+int frameCount_te = 0;
+int frameNumber_te = 0;
+NSString *frame_te;
+AppDelegate *appDelegate_te;
+
 
 - (NSNumber*)cancelTimer {
     NSTimeInterval elapsedTime = [[NSDate date] timeIntervalSinceDate:startDate_te];
@@ -74,6 +93,9 @@ NSMutableArray *correctOrIncorrect_te;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.videoCamera start];
+    appDelegate_te = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     userAnswers_te = [[NSMutableArray alloc] init];
     
     timePerTestPage_te = [[NSMutableArray alloc] init];
@@ -89,6 +111,44 @@ NSMutableArray *correctOrIncorrect_te;
     
     image.image = [UIImage imageNamed:[questions_te objectAtIndex:0]];
 }
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [self.videoCamera stop];
+}
+
+#ifdef __cplusplus
+-(CvVideoCamera *)videoCamera{
+    if(!_videoCamera) {
+        _videoCamera = [[CvVideoCamera alloc] initWithParentView:self.cameraOutput];
+        _videoCamera.delegate = self;
+        _videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
+        _videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset640x480;
+        _videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+        _videoCamera.defaultFPS =10;
+        _videoCamera.grayscaleMode = NO;
+        
+    }
+    
+    return _videoCamera;
+    
+}
+
+-(void)processImage:(Mat&)image; {
+    Mat grayFrame, output;
+    imageFrames_te[frameCount_te] = image;
+    frameCount_te++;
+    
+    if(frameCount_te == 48) {
+        frame_te = [NSString stringWithFormat:@"%d", frameNumber_te];
+        frameNumber_te = frameNumber_te + 1;
+        [appDelegate_te sendFramesAndWriteToFile:imageFrames_te:frameCount_te:"TE":""];
+        frameCount_te = 0;
+    }
+    
+}
+
+#endif
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
