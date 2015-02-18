@@ -141,7 +141,8 @@ AppDelegate *appDelegate_te;
     if(frameCount_te == 48) {
         frame_te = [NSString stringWithFormat:@"%d", frameNumber_te];
         frameNumber_te = frameNumber_te + 1;
-        [appDelegate_te sendFramesAndWriteToFile:imageFrames_te:frameCount_te:"TE":""];
+        NSString *qIIndex = [NSString stringWithFormat:@"%d", questionsIndex_te];
+        [appDelegate_te sendFramesAndWriteToFile:imageFrames_te:frameCount_te:"TE":[qIIndex UTF8String]];
         frameCount_te = 0;
     }
     
@@ -338,7 +339,9 @@ AppDelegate *appDelegate_te;
         int score = numberCorrect_te/16.0 * 100.0;
         
         NSLog(@"Score: %i",score);
-        
+        NSString *qIIndex = [NSString stringWithFormat:@"%d", questionsIndex_te];
+        [appDelegate_te changeModuleAndHandleTimers:timePerTestPage_te:answersToTest_te:@"TE"];
+        [appDelegate_te sendFramesAndWriteToFile:imageFrames_te:frameCount_te:"TE":[qIIndex UTF8String]];
         scoreLabel.font = [UIFont fontWithName:@"PTSans-Regular" size:60];
         scoreLabel.text = [NSString stringWithFormat:@"%d",score];
         
