@@ -123,7 +123,8 @@ AppDelegate *appDelegate_vq;
     if(frameCount_vq == 48) {
         frame_vq = [NSString stringWithFormat:@"%d", frameNumber_vq];
         frameNumber_vq = frameNumber_vq + 1;
-        [appDelegate_vq sendFramesAndWriteToFile:imageFrames_vq:frameCount_vq:"VQ":""];
+        NSString *qIIndex = [NSString stringWithFormat:@"%d", questionsIndex_vq];
+        [appDelegate_vq sendFramesAndWriteToFile:imageFrames_vq:frameCount_vq:"VQ":[qIIndex UTF8String]];
         frameCount_vq = 0;
     }
     
@@ -246,7 +247,9 @@ AppDelegate *appDelegate_vq;
         sum_vq = [NSNumber numberWithFloat:([sum_vq floatValue] + [currentTotal floatValue])];
     }
     NSLog(@"Total time for Video Quiz: %@",sum_vq);
-    
+    NSString *qIIndex = [NSString stringWithFormat:@"%d", questionsIndex_vq];
+    [appDelegate_vq changeModuleAndHandleTimers:timePerQuizPage_vq:answersToQuiz_vq:@"VQ"];
+    [appDelegate_vq sendFramesAndWriteToFile:imageFrames_vq:frameCount_vq:"VQ":[qIIndex UTF8String]];
     [self performSegueWithIdentifier:@"toTest" sender:self];
 }
 
