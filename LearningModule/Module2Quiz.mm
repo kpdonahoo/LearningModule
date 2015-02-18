@@ -130,7 +130,8 @@ AppDelegate *appDelegate_q2;
     if(frameCount_q2 == 48) {
         frame_q2 = [NSString stringWithFormat:@"%d", frameNumber_q2];
         frameNumber_q2 = frameNumber_q2 + 1;
-        [appDelegate_q2 sendFramesAndWriteToFile:imageFrames_q2:frameCount_q2:"Q2":""];
+        NSString *qIIndex = [NSString stringWithFormat:@"%d", questionsIndex_q2];
+        [appDelegate_q2 sendFramesAndWriteToFile:imageFrames_q2:frameCount_q2:"Q2":[qIIndex UTF8String]];
         frameCount_q2 = 0;
     }
     
@@ -281,7 +282,9 @@ AppDelegate *appDelegate_q2;
         sum_q2 = [NSNumber numberWithFloat:([sum_q2 floatValue] + [currentTotal floatValue])];
     }
     NSLog(@"Total time for Module 2 Quiz: %@",sum_q2);
-    
+    NSString *qIIndex = [NSString stringWithFormat:@"%d", questionsIndex_q2];
+    [appDelegate_q2 changeModuleAndHandleTimers:timePerQuizPage_q2:answersToQuiz_q2:@"Q2"];
+    [appDelegate_q2 sendFramesAndWriteToFile:imageFrames_q2:frameCount_q2:"Q2":[qIIndex UTF8String]];
     [self performSegueWithIdentifier:@"toModule3" sender:self];
 }
 
